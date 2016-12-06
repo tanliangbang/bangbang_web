@@ -15,6 +15,7 @@ angular.module('reactTestApp')
       'Karma'
     ];
 
+
     /*$http.post("/api/login",{username:'bangbang',password:'123123'},function(data){
     console.log(data)
   });*/
