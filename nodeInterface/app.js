@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var upload = require('./routes/upload');
+var article = require('./routes/article');
+
 var app = express();
 
 
@@ -26,7 +28,7 @@ app.use('/', index);
 app.use('/api', index);
 app.use('/api/users', users);
 app.use('/api/upload', upload);
-
+app.use('/api/article', article);
 
 
 
