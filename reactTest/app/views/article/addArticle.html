@@ -17,14 +17,14 @@
                   <div class="form-group">
                     <label for="text" class="col-lg-2 col-md-3 control-label">标题</label>
                     <div class="col-lg-10 col-md-9">
-                      <input id="text" type="text" class="form-control required title"  ng-model="article.title" aria-required="true"  placeholder="标题">
+                      <input id="text" type="text"   class="form-control required title"  ng-model="articleDate.title" aria-required="true"  placeholder="标题">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="text" class="col-lg-2 col-md-3 control-label">开始时间</label>
                     <div class="col-lg-3 col-md-9 ">
                        <div class="input-group">
-                         <input  ng-model="startTime"  name="startTime" type="text"  placeholder="开始时间"  class="form-control datetimepicker startTime" >
+                         <input  ng-model="articleDate.startTime"   name="startTime" type="text"  placeholder="开始时间"  class="form-control  datetimepicker" >
                          <span class="input-group-addon"><i class="im-calendar4"></i></span>
                        </div>
                     </div>
@@ -33,7 +33,7 @@
                     <label for="text" class="col-lg-2 col-md-3 control-label">结束时间</label>
                     <div class="col-lg-3 col-md-9 input-group">
                       <div class="input-group">
-                        <input ng-model="endTime" name="endTime" placeholder="结束时间"    class="form-control datetimepicker" type="text" >
+                        <input ng-model="articleDate.endTime"  name="endTime" placeholder="结束时间"    class="form-control datetimepicker" type="text" >
                         <span class="input-group-addon"><i class="im-calendar4"></i></span>
                       </div>
                     </div>
@@ -43,7 +43,7 @@
                   <div class="form-group">
                     <label for="text" class="col-lg-2 col-md-3 control-label">来源</label>
                     <div class="col-lg-10 col-md-9">
-                      <input id="fromWhere" name="fromWhere" type="text" ng-model="article.fromWhere" class="form-control" placeholder="来源">
+                      <input id="fromWhere" name="fromWhere" type="text" ng-model="articleDate.fromWhere" class="form-control" placeholder="来源">
                     </div>
                   </div>
 

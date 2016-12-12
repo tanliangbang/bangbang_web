@@ -7,15 +7,15 @@ var mysql = require('mysql');
 var db = require('../util/db.js');
 
 router.post('/addArticle', function(req, res, next) {
-   // var sql = "insert into article (title,fromWhere,content,startTime,endTime) values ('aaaaaa','bbbbbbb','sdfsdf',now(),now())";
+     // var sql = "insert into article (title,fromWhere,content,startTime,endTime) values ('aaaaaa','bbbbbbb','sdfsdf',now(),now())";
      console.log(req.body)
-  /*  db.query(sql, function(err, rows, fields){
-        if (err) {
-            console.log(err);
-            return;
-        }
-        console.log(rows);
-    });*/
+     /*  db.query(sql, function(err, rows, fields){
+      if (err) {
+      console.log(err);
+      return;
+      }
+      console.log(rows);
+      });*/
 
 });
 

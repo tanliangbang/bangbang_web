@@ -14,13 +14,16 @@ angular.module('reactTestApp')
       'AngularJS',
       'Karma'
     ];
-     $scope.article =  {};
+     $scope.articleDate =  {};
       UE.getEditor('article')
-     $('.datetimepicker').datetimepicker();
+       $('.datetimepicker').datetimepicker({
+         showSecond: true,
+         timeFormat: 'hh:mm:ss'
+       });
 
     $scope.addArticleBtn = function(){
-      console.log($scope.article);
-      //$scope.article.content = UE.getEditor("article").getContent();
+      console.log($scope.articleDate)
+      //$scope.articleDate.content = UE.getEditor("article").getContent();
       /*$http.post("/api/article/addArticle",$scope.article,function(data){
         console.log(data)
       });*/
@@ -29,6 +32,12 @@ angular.module('reactTestApp')
     $scope.$on('$locationChangeSuccess',function(){
         UE.getEditor("article").destroy();
     })
+
+
+
+
+
+
 
 
   }])
