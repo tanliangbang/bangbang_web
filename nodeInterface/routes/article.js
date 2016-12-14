@@ -15,8 +15,25 @@ router.post('/addArticle', function(req, res, next) {
       console.log(err);
       return;
       }
+
       console.log(rows);
       });
+
+});
+
+
+router.get('/getArticleList', function(req, res, next) {
+    var sql = "select * from article";
+    console.log(sql)
+    db.query(sql, function(err, rows, fields){
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(rows));
+    });
 
 });
 

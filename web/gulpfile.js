@@ -11,6 +11,7 @@ var runSequence = require('run-sequence');
 var del = require('del');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var proxy = require('http-proxy-middleware');
 
 
 //app directory structor
@@ -134,8 +135,14 @@ gulp.task('start:server', function() {
     livereload:true,
     port: 9000,
     middleware:function(connect, opt){
-      return [['/bower_components',
-        connect["static"]('./bower_components')]]
+      return [['/bower_components', connect["static"]('./bower_components')],
+        proxy('/api', {// configure proxy middleware
+          // context: '/' will proxy all requests
+          //bone: '/bone',    to proxy request when path starts with '/api'
+          target: 'http://localhost:3000',
+          changeOrigin:true    // for vhosted sites, changes host header to match to target's host
+        })
+      ]
     }
   });
 

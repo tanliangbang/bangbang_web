@@ -1,0 +1,27 @@
+<!-- Add your site or application content here -->
+<div class="header">
+  <div class="navbar navbar-default" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" href="index">bangbang</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="js-navbar-collapse">
+
+        <ul class="nav navbar-nav">
+          <li ng-click="changeColor(1)" class="{{isActive==1?'active':''}}"><a href="index">首页</a></li>
+          <li ng-click="changeColor(2)" class="{{isActive==2?'active':''}}"> <a ng-href="news">资讯</a></li>
+          <li ng-click="changeColor(3)" class="{{isActive==3?'active':''}}" ><a ng-href="aboutMe">关于我们</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
