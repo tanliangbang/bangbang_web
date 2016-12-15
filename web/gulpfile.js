@@ -12,7 +12,7 @@ var del = require('del');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var proxy = require('http-proxy-middleware');
-
+var modRewrite = require('connect-modrewrite')
 
 //app directory structor
 var yeoman = {
@@ -134,6 +134,8 @@ gulp.task('start:server', function() {
     root:[yeoman.temp, yeoman.app],
     livereload:true,
     port: 9000,
+    host: '192.168.1.117',
+    fallback: yeoman.app+ "/index.html",
     middleware:function(connect, opt){
       return [['/bower_components', connect["static"]('./bower_components')],
         proxy('/api', {// configure proxy middleware
@@ -141,16 +143,21 @@ gulp.task('start:server', function() {
           //bone: '/bone',    to proxy request when path starts with '/api'
           target: 'http://localhost:3000',
           changeOrigin:true    // for vhosted sites, changes host header to match to target's host
-        })
+        }), modRewrite([
+          '!\\.html|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg$ /index.html'
+        ])
+
       ]
-    }
+    },
   });
 
-
-
-
-
 });
+
+
+
+
+
+
 
 gulp.task('start:server:test', function() {
   $.connect.server({

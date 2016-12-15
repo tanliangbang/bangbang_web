@@ -17,7 +17,6 @@ angular.module('webApp')
       'AngularJS',
       'Karma'
     ];
-    $scope.isActive = 1;
     $scope.changeColor = function(num){
       $scope.isActive = num;
     }

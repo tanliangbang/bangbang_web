@@ -34,9 +34,13 @@ angular
         controller: 'NewsCtrl',
         controllerAs: 'news'
       })
+      .when('/newsDetail', {
+        templateUrl: 'views/newsDetail.html',
+        controller: 'NewsDetailCtrl',
+        controllerAs: 'newsDetail'
+      })
       .otherwise({
         redirectTo: '/'
       });
-    $locationProvider.html5Mode(true);
-
+    $locationProvider.html5Mode({enabled: true, requireBase: false})
   });

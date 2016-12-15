@@ -1,6 +1,8 @@
 // bower:scss
 // endbower
 @import "common";
+@import "article";
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -120,10 +122,6 @@ body {
   }
 }
 
-
-.col-md-8{
-  padding:0px;
-}
 
 .carousel-inner > .item > img, .carousel-inner > .item > a > img {
   width:100%;

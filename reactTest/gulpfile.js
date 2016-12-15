@@ -12,6 +12,7 @@ var del = require('del');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var proxy = require('http-proxy-middleware');
+var modRewrite = require('connect-modrewrite')
 
 
 //app directory structor
@@ -141,7 +142,9 @@ gulp.task('start:server', function() {
           //bone: '/bone',    to proxy request when path starts with '/api'
           target: 'http://localhost:3000',
           changeOrigin:true    // for vhosted sites, changes host header to match to target's host
-        })
+        }), modRewrite([
+          '!\\.html|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg$ /index.html'
+        ])
       ]
     }
   });

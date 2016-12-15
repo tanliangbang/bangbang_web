@@ -8,10 +8,12 @@
  * Controller of the webApp
  */
 angular.module('webApp')
-  .controller('MainCtrl', function () {
+  .controller('MainCtrl', ['$scope','$rootScope', function ($scope,$rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-  });
+    $rootScope.isActive = 1;
+
+  }]);
