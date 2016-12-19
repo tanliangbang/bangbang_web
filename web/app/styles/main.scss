@@ -2,7 +2,7 @@
 // endbower
 @import "common";
 @import "article";
-
+@import "animation";
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -20,15 +20,13 @@ body {
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
 
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
+  border:none;
+  border-radius: 0px;
   /* Make the masthead heading the same height as the navigation */
   .navbar-nav > li > a {
     padding: 15px;
@@ -45,8 +43,13 @@ body {
     padding-bottom: 19px;
   }
   .navbar{
+    position:fixed;
+    top:0px;
+    width:100%;
+    z-index:1000;
     background:#005387;
     margin-bottom: 0px;
+    border:none;
     a:hover {
       color:#fff;
     }
@@ -112,9 +115,13 @@ body {
     padding-left: 0;
     padding-right: 0;
   }
+
   /* Space out the masthead */
   .header {
-    margin-bottom: 30px;
+      position:fixed;
+      top:0px;
+      width:100%;
+      z-index:1000;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
@@ -141,6 +148,10 @@ hr{
 
 .rightMargin{
   padding:5px 15px;
+}
+
+.headerDiv{
+  min-height: 55px;
 }
 
 
