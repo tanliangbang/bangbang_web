@@ -29,6 +29,13 @@ angular
         controller: 'AddArticleCtrl',
         controllerAs: 'addArticle'
       })
+
+      .when('/resAdd', {
+        templateUrl: 'views/res/resAdd.html',
+        controller: 'ResAddCtrl',
+        controllerAs: 'resAdd'
+      })
+
       .otherwise({
         redirectTo: '/'
       });

@@ -1,0 +1,49 @@
+.mytable{
+  border:1px solid #1bbc9b;
+  border-radius:8px;
+  margin-top:20px;
+  .box-title {
+    color: #FFFFFF !important;
+    background-color: #1bbc9b;
+    border-bottom: 1px solid #1bbc9b;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    >h4{
+      height:40px;
+      line-height:40px;
+      margin:0px;
+      padding-left:20px;
+    }
+  }
+  .table{
+    margin-bottom:0px;
+  }
+
+}
+
+
+.t-center{
+  text-align: center;
+}
+
+
+.Mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #000;
+  top: 0px;
+  opacity: 0.5;
+  z-index: 1000;
+  left: 0px;
+}
+
+
+.addFieldForm {
+  width: 435px;
+  position: absolute;
+  left: 50%;
+  margin-left: -217px;
+  top: 200px;
+  z-index: 1001;
+}

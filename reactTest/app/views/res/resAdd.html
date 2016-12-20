@@ -1,0 +1,200 @@
+<div class="content-wrapper addArticle">
+  <div ng-include="'views/common/nav.html'"></div>
+  <mask></mask>
+  <div class="content-inner">
+    <!-- Start .row -->
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Start col-lg-12 -->
+        <div class="panel panel-default plain toggle" id="jst_0">
+          <!-- Start .panel -->
+          <div class="panel-heading">
+            <h4 class="panel-title">添加资源</h4>
+            <div class="panel-controls"><a href="#" class="toggle panel-minimize"><i class="im-minus"></i></a></div></div>
+          <div class="panel-body">
+            <form name="myForm" class="form-horizontal group-border hover-stripped" role="form"   ->
+              <div class="form-group">
+                <label  class="col-lg-2 col-md-3 control-label">资源名称</label>
+                <div class="col-lg-10 col-md-9">
+                  <input  type="text" ng-model="name" class="form-control required" aria-required="true"  required="">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label  class="col-lg-2 col-md-3 control-label">资源描叙</label>
+                <div class="col-lg-10 col-md-9">
+                  <input  type="text" ng-model="name" class="form-control required" aria-required="true"  required="">
+                </div>
+              </div>
+
+
+              <div class="box border mytable">
+                <div class="box-title">
+                  <h4><i class="fa fa-table"></i>&nbsp;&nbsp;字段:</h4>
+                </div>
+                <div class="box-body">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>中文名称</th>
+                      <th>字段名称</th>
+                      <th>描述</th>
+                      <th>类型</th>
+                      <th>是否必须</th>
+                      <th>是否显示</th>
+                      <th>
+                        <a ng-click="showAddFieldFn()" class="btn btn-success hover-link colorbox-button cboxElement operaBtn" title="添加"><i class="fa fa-plus fa-1x"></i></a>
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td class="ng-binding">英文简称</td>
+                      <td class="ng-binding">simpleName</td>
+                      <td class="ng-binding">英文简称</td>
+                      <td class="ng-binding">text</td>
+                      <td class="ng-binding">1</td>
+                      <td class="ng-binding">1</td>
+                      <td>
+                        <a class="btn btn-success hover-link mgr-10 operaBtn" ng-click="editResFieldFn()" title="修改"><i class="fa fa-edit fa-1x"></i></a>
+                        <a class="btn btn-success hover-link colorbox-button cboxElement operaBtn" ng-click="delResFieldFn()" title="删除"><i class="fa fa-minus fa-1x"></i></a>
+                      </td>
+                    </tr>
+
+
+                    <tr ng-repeat="field in fields">
+                      <td>{{field.dataChinaName}}</td>
+                      <td>{{field.name}}</td>
+                      <td>{{field.brief}}</td>
+                      <td>{{field.dataType}}</td>
+                      <td>{{field.dataIsNeed}}</td>
+                      <td>{{field.isShow}}</td>
+                      <td>
+                        <a class="btn btn-success hover-link mgr-10 operaBtn" ng-click="editResFieldFn()" title="修改"><i class="fa fa-edit fa-1x"></i></a>
+                        <a class="btn btn-success hover-link colorbox-button cboxElement operaBtn" ng-click="delResFieldFn()" title="删除"><i class="fa fa-minus fa-1x"></i></a>
+
+                      </td>
+                    </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <div class="t-center">
+                  <button class="btn btn-teal ml15" type="submit" ng-click="addResFn()">添&nbsp;&nbsp;加</button>
+                </div>
+              </div>
+              <!-- End .form-group  -->
+            </form>
+          </div>
+        </div>
+        <!-- End .panel -->
+      </div>
+      <!-- End col-lg-12 -->
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+<div class="box border green addFieldForm" ng-show="fileFormShow">
+  <div class="box-title">
+    <h4><i class="fa fa-bars"></i>添加字段</h4>
+    <div class="tools hidden-xs">
+
+      <a href="" ng-click="closeCurrFn()"  class="remove">
+        <i class="fa fa-times"></i>
+      </a>
+    </div>
+  </div>
+  <div class="box-body big">
+    <form class="form-horizontal ng-pristine ng-invalid ng-invalid-required"  name="filedForm" role="form" -="">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">中文名称</label>
+        <div class="col-sm-9">
+          <input class="form-control" ng-model="dataChinaName" type="text" placeholder="中文名称" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">英文名称</label>
+        <div class="col-sm-9">
+          <input class="form-control" ng-model="name" type="text" placeholder="英文名称" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">描述</label>
+        <div class="col-sm-9">
+          <input class="form-control" ng-model="brief" type="text" placeholder="描述" required>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">类型</label>
+        <div class="col-sm-9">
+          <select ng-change="typeSelect(dataType)" ng-model="dataType" class="form-control">
+            <option  ng-repeat="fieldType in fieldTypes"  value="{{fieldType}}">{{fieldType}}</option>
+
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" ng-show="enum">
+        <label class="col-sm-3 control-label"></label>
+        <div class="col-sm-9">
+          <input class="form-control" ng-model="enumVal" type="text" placeholder="枚举字段，请用逗号分隔" required>
+        </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">是否必须</label>
+        <div class="col-sm-9">
+          <select ng-model="dataIsNeed" class="form-control">
+            <option value="0">否</option>
+            <option value="1">是</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">是否显示</label>
+        <div class="col-sm-9">
+          <select ng-model="isShow" class="form-control">
+            <option value="0">否</option>
+            <option value="1">是</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="txtCenter">
+        <button ng-if="!isEditField" type="submit" ng-click="addFileBtnFn()" class="btn btn-success ng-scope">添&nbsp;&nbsp;&nbsp;&nbsp;加</button>
+        <button ng-if="isEditField" type="submit" ng-click="addFileBtnFn()" class="btn btn-success ng-scope">修&nbsp;&nbsp;&nbsp;&nbsp;改</button>
+
+      </div>
+
+
+
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

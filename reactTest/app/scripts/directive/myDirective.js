@@ -1,4 +1,6 @@
-angular.module('reactTestApp').directive('datetimepicker', function() {
+var app = angular.module('reactTestApp');
+
+app.directive('datetimepicker', function() {
   return {
     restrict: 'A',
     require: 'ngModel',
@@ -13,4 +15,21 @@ angular.module('reactTestApp').directive('datetimepicker', function() {
       };
     }
   };
+});
+
+
+app.directive("mask", function() {
+  return {
+    restrict:'AEC',
+    link:function(scope,el,attrs){
+      scope.showMask = function(){
+        this.maskShow = true;
+      }
+
+      scope.closeMask = function(){
+        this.maskShow = false;
+      }
+    },
+    template:'<div ng-show="maskShow" class="Mask"></div>'
+  }
 });
