@@ -33,7 +33,7 @@ angular.module('reactTestApp')
     var id = $routeParams.id;
     $http.get("/api/res/getRes?id="+id).success(function(data,status,headers,congfig){
 
-       $scope.currResType = currResType = data.data[0];
+       $scope.currResType = currResType = data[0];
         fields = JSON.parse(currResType.type_specification);
         $scope.fields = fields;
         $scope.otherField = {};

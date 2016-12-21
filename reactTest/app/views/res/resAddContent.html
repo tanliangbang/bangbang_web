@@ -1,0 +1,94 @@
+
+<div id="main-content" >
+  <div class="container">
+    <div class="row">
+      <div  class="col-lg-12">
+        <!-- PAGE HEADER-->
+        <div ng-include="'js/views/common/headerNav.html'"></div>
+
+        <!-- /PAGE HEADER -->
+
+
+
+
+
+
+
+
+        <div class="box border green">
+          <div class="box-title mgb-20">
+            <h4><i class="fa fa-bars"></i>{{isEdit?'编辑':'添加'}}{{currResType.cname}}</h4>
+          </div>
+        </div>
+
+
+
+        <div class="addBanner">
+          <form class="form-horizontal resAddContentForm" name="myForm" role="form" ->
+
+            <div  field ng-repeat="(key,val) in fields" class="otherFields"   data-num="{{$index}}"  data-desc="{{val.dataChinaName}}" data-name="{{key}}" data-type="{{val.dataType}}" data-enumVal="{{val.enumVal}}" data-isNeed="{{val.dataIsNeed}}" data-content="{{editorContent[$index][key]}}"></div>
+
+
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">是否上线：</label>
+              <div class="col-sm-3">
+                <select  class="form-control" ng-model="otherField.isOnLine">
+                  <option value="1" >是</option>
+                  <option value="0">否</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">活动开始时间:</label>
+              <div class="col-sm-3">
+                <input ng-model="otherField.startTime" name="startTime"  class="form-control pickerDate"  type="text" placeholder="活动开始时间" required>
+                              <span class="errorInput" ng-show="myForm.startTime.$dirty && myForm.startTime.$invalid">
+                             <span ng-show="myForm.startTime.$error.required">开始时间是必须的</span>
+                              </span>
+              </div>
+
+              <label class="col-sm-3 control-label">活动结束时间:</label>
+              <div class="col-sm-3">
+                <input ng-model="otherField.endTime"  name="endTime" class="form-control pickerDate"    type="text"  placeholder="活动开始时间" required>
+                              <span class="errorInput" ng-show="myForm.endTime.$dirty && myForm.endTime.$invalid">
+                                 <span ng-show="myForm.endTime.$error.required">结束时间是必须的</span>
+                              </span>
+              </div>
+            </div>
+
+
+            <div class="form-group btnCenter">
+              <button ng-if="!isEdit"  ng-click="submitResFn()" type="submit"  class="btn btn-success">添&nbsp;&nbsp;&nbsp;&nbsp;加</button>
+
+              <button ng-if="isEdit" ng-click="submitResFn()" type="submit"  class="btn btn-success">修&nbsp;&nbsp;&nbsp;&nbsp;改</button>
+
+            </div>
+          </form>
+
+        </div>
+
+
+
+
+
+
+
+
+        <div file-input="file" on-change="readFile()"></div>
+
+        <img ng-src="{{imageSrc}}"/>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
