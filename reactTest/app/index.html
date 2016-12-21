@@ -40,7 +40,7 @@
     <meta name="msapplication-TileColor" content="#3399cc" />
     <base href="/">
 </head>
-<body ng-app="reactTestApp" class="ovh">
+<body ng-app="reactTestApp"  ng-controller="bodyController"  class="ovh">
 <div id="preloader">
     <div id="preloader-logo">
         <img src="assets/img/preloader-logo.png" alt="Logo">
@@ -126,8 +126,16 @@
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/controllers/about.js"></script>
 <script src="scripts/controllers/addArticle.js"></script>
-<script src="scripts/controllers/resAdd.js"></script>
+
+
+<script src="scripts/controllers/res/resAdd.js"></script>
+<script src="scripts/controllers/res/resContentList.js"></script>
+<script src="scripts/controllers/res/resAddContent.js"></script>
+
+
+
 <script src="scripts/directive/myDirective.js"></script>
+<script src="scripts/controllers/bodyController.js"></script>
 
 </body>
 </html>

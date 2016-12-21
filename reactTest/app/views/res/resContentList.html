@@ -1,0 +1,71 @@
+<div class="content-wrapper addArticle">
+     <div ng-include="'views/common/nav.html'"></div>
+     <div class="content-inner">
+
+
+
+       <div class="box border mytable">
+         <div class="box-title">
+           <h4><i class="fa fa-table"></i>&nbsp;&nbsp;字段:</h4>
+         </div>
+         <div class="box-body">
+           <table class="table">
+             <thead>
+             <tr>
+               <th>中文名称</th>
+               <th>字段名称</th>
+               <th>描述</th>
+               <th>类型</th>
+               <th>是否必须</th>
+               <th>是否显示</th>
+               <th>
+                 <a ng-click="showAddFieldFn()" class="btn btn-success hover-link colorbox-button cboxElement operaBtn" title="添加"><i class="fa fa-plus fa-1x"></i></a>
+               </th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr>
+               <td>aaaaaa</td>
+               <td>aaaaaaaa</td>
+               <td>aaaaaaaaa</td>
+               <td>aaaaaaaa</td>
+               <td>aaaaaaaa</td>
+               <td>aaaaaaaa</td>
+               <td>
+                 <a class="btn btn-success hover-link mgr-10 operaBtn" ng-click="editResFieldFn()" title="修改"><i class="fa fa-edit fa-1x"></i></a>
+                 <a class="btn btn-success hover-link colorbox-button cboxElement operaBtn" ng-click="delResFieldFn()" title="删除"><i class="fa fa-minus fa-1x"></i></a>
+
+               </td>
+             </tr>
+
+
+             <tr>
+               <td>aaaaaa</td>
+               <td>aaaaaaaa</td>
+               <td>aaaaaaaaa</td>
+               <td>aaaaaaaa</td>
+               <td>aaaaaaaa</td>
+               <td>aaaaaaaa</td>
+               <td>
+                 <a class="btn btn-success hover-link mgr-10 operaBtn" ng-click="editResFieldFn()" title="修改"><i class="fa fa-edit fa-1x"></i></a>
+                 <a class="btn btn-success hover-link colorbox-button cboxElement operaBtn" ng-click="delResFieldFn()" title="删除"><i class="fa fa-minus fa-1x"></i></a>
+
+               </td>
+             </tr>
+
+             </tbody>
+           </table>
+
+           <div class="t-center btnMargin">
+             <a class="btn btn-teal" href="resAddContent?type={{type}}&id={{id}}" >添&nbsp;加&nbsp;数&nbsp;据</a>
+           </div>
+
+         </div>
+       </div>
+
+
+
+
+     </div>
+</div>
+

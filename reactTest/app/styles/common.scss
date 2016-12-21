@@ -1,11 +1,27 @@
+$activeColor:#e02612;
+$commonColor:#1bbc9b;
+
+//----------------------------------------------------------common css------------------------------------------------------------------------
+.t-center{
+  text-align: center;
+}
+
+.mgb20{
+  margin-bottom:20px;
+}
+
+
+//-------------------------------------------------------end common css --------------------------------------------------------------------------------
+
 .mytable{
   border:1px solid #1bbc9b;
   border-radius:8px;
   margin-top:20px;
+  background:#fff;
   .box-title {
     color: #FFFFFF !important;
-    background-color: #1bbc9b;
-    border-bottom: 1px solid #1bbc9b;
+    background-color: $commonColor;
+    border-bottom: 1px solid $commonColor;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     >h4{
@@ -22,9 +38,7 @@
 }
 
 
-.t-center{
-  text-align: center;
-}
+
 
 
 .Mask {
@@ -46,4 +60,35 @@
   margin-left: -217px;
   top: 200px;
   z-index: 1001;
+  background:#fff;
+  .box-title{
+    height:40px;
+    padding-left:10px;
+    background:#1bbc9b;
+    color:#fff;
+    margin-bottom:10px;
+    h4{
+      margin:0px;
+      line-height:40px;
+      float:left;
+      height:100%;
+    }
+    i{
+      float:right;
+      right:20px;
+      color:#fff;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+  }
+}
+
+
+//---------------------------------------------left css--------------------------------------------
+.hasSub{
+   display:none;
+}
+
+.btnMargin{
+  margin:20px 0px;
 }

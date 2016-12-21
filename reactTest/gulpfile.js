@@ -13,7 +13,7 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var proxy = require('http-proxy-middleware');
 var modRewrite = require('connect-modrewrite')
-
+var compass = require('gulp-compass');
 
 //app directory structor
 var yeoman = {

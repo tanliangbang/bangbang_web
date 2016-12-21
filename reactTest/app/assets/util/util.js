@@ -17,3 +17,10 @@ function getImgDate(_this){
   // alert("请选择正确的图片");
   // }
 }
+
+function isEmpty(iptstr){
+  if(!iptstr||iptstr==""||iptstr==null){
+    return true;
+  }
+  return false;
+}

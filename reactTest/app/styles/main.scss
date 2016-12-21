@@ -2,6 +2,9 @@
 // endbower
 @import 'common';
 @import 'article';
+ul{
+  list-style-type: none;
+}
 .none{
   display:none !important;
 }

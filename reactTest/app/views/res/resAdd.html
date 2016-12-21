@@ -16,14 +16,14 @@
               <div class="form-group">
                 <label  class="col-lg-2 col-md-3 control-label">资源名称</label>
                 <div class="col-lg-10 col-md-9">
-                  <input  type="text" ng-model="name" class="form-control required" aria-required="true"  required="">
+                  <input  type="text" ng-model="res_name" class="form-control required" aria-required="true"  required="">
                 </div>
               </div>
 
               <div class="form-group">
                 <label  class="col-lg-2 col-md-3 control-label">资源描叙</label>
                 <div class="col-lg-10 col-md-9">
-                  <input  type="text" ng-model="name" class="form-control required" aria-required="true"  required="">
+                  <input  type="text" ng-model="res_desc" class="form-control required" aria-required="true"  required="">
                 </div>
               </div>
 
@@ -48,20 +48,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td class="ng-binding">英文简称</td>
-                      <td class="ng-binding">simpleName</td>
-                      <td class="ng-binding">英文简称</td>
-                      <td class="ng-binding">text</td>
-                      <td class="ng-binding">1</td>
-                      <td class="ng-binding">1</td>
-                      <td>
-                        <a class="btn btn-success hover-link mgr-10 operaBtn" ng-click="editResFieldFn()" title="修改"><i class="fa fa-edit fa-1x"></i></a>
-                        <a class="btn btn-success hover-link colorbox-button cboxElement operaBtn" ng-click="delResFieldFn()" title="删除"><i class="fa fa-minus fa-1x"></i></a>
-                      </td>
-                    </tr>
-
-
                     <tr ng-repeat="field in fields">
                       <td>{{field.dataChinaName}}</td>
                       <td>{{field.name}}</td>
@@ -106,16 +92,16 @@
 
 <div class="box border green addFieldForm" ng-show="fileFormShow">
   <div class="box-title">
-    <h4><i class="fa fa-bars"></i>添加字段</h4>
+    <h4>添加字段</h4>
     <div class="tools hidden-xs">
 
       <a href="" ng-click="closeCurrFn()"  class="remove">
-        <i class="fa fa-times"></i>
+        <i class="fa fa-times " ng-click="closeCurrMask()"></i>
       </a>
     </div>
   </div>
   <div class="box-body big">
-    <form class="form-horizontal ng-pristine ng-invalid ng-invalid-required"  name="filedForm" role="form" -="">
+    <form class="form-horizontal ng-pristine ng-invalid ng-invalid-required"   name="filedForm" role="form" -="">
       <div class="form-group">
         <label class="col-sm-3 control-label">中文名称</label>
         <div class="col-sm-9">
@@ -178,7 +164,7 @@
         </div>
       </div>
 
-      <div class="txtCenter">
+      <div class="t-center mgb20">
         <button ng-if="!isEditField" type="submit" ng-click="addFileBtnFn()" class="btn btn-success ng-scope">添&nbsp;&nbsp;&nbsp;&nbsp;加</button>
         <button ng-if="isEditField" type="submit" ng-click="addFileBtnFn()" class="btn btn-success ng-scope">修&nbsp;&nbsp;&nbsp;&nbsp;改</button>
 

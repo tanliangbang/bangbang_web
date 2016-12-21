@@ -35,6 +35,21 @@ angular
         controller: 'ResAddCtrl',
         controllerAs: 'resAdd'
       })
+      .when('/resContentList', {
+        templateUrl: 'views/res/resContentList.html',
+        controller: 'ResContentListCtrl',
+        controllerAs: 'resContentList'
+      })
+
+      .when('/resAddContent', {
+        templateUrl: 'views/res/resAddContent.html',
+        controller: 'ResAddContentCtrl',
+        controllerAs: 'resAddContent'
+      })
+
+
+
+
 
       .otherwise({
         redirectTo: '/'
