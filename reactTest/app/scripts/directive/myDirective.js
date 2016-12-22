@@ -1,5 +1,4 @@
 var app = angular.module('reactTestApp');
-
 app.directive('datetimepicker', function() {
   return {
     restrict: 'A',
@@ -33,3 +32,4 @@ app.directive("mask", function() {
     template:'<div ng-show="maskShow" class="Mask"></div>'
   }
 });
+

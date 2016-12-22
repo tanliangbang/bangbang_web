@@ -3,27 +3,23 @@
  */
 var app = angular.module('reactTestApp');
 
-    var textNI = 'fieldType=="text"'
-    var  text=    '<div ng-if='+textNI+'  class="form-group">'+
-                        '<label class="col-sm-3 control-label">{{desc}}：</label>'+
-                        '<div class="col-sm-9">'+
-                           '<input class="form-control"  value="{{content}}" name="{{name}}"  type="text" placeholder="{{name}}"  required />'+
-                                '<span class="errorInput" ng-show="myForm.{{name}}.$dirty && myForm.{{name}}.$invalid">'+
-                                     '<span ng-show="myForm.{{name}}.$error.required">{{name}}是必须。</span>'+
-                                '</span>'+
-                        '</div>'+
-                    '</div>';
 
     var dateNI = 'fieldType=="date"'
     var  date=    '<div ng-if='+dateNI+'  class="form-group">'+
         '<label class="col-sm-3 control-label">{{desc}}：</label>'+
         '<div class="col-sm-3">'+
-        '<input class="form-control pickerDate" ng-click="dateSeleFn($event.target)" value="{{content}}"  name="{{name}}"  type="text" placeholder="{{name}}"  required />'+
-        '<span class="errorInput" ng-show="myForm.{{name}}.$dirty && myForm.{{name}}.$invalid">'+
-        '<span ng-show="myForm.{{name}}.$error.required">{{name}}是必须。</span>'+
-        '</span>'+
+        '<input class="form-control pickerDate" ng-click="dateSeleFn($event)" value="{{content}}"  name="{{name}}"  type="text" placeholder="{{name}}"  required />'+
         '</div>'+
         '</div>';
+
+
+    var textNI = 'fieldType=="text"'
+    var  textInput='<div ng-if='+textNI+'  class="form-group">'+
+      '<label class="col-lg-3 col-md-3 control-label">{{desc}}：</label>'+
+      '<div class="col-lg-9 col-md-9">'+
+      '<input class="form-control"  value="{{content}}" name="{{name}}"  type="text" placeholder="{{name}}"  required />'+
+      '</div>'+
+      '</div>';
 
 
     var numberNI = 'fieldType=="number"'
@@ -31,9 +27,6 @@ var app = angular.module('reactTestApp');
         '<label class="col-sm-3 control-label">{{desc}}：</label>'+
         '<div class="col-sm-3">'+
         '<input class="form-control"  value="{{content}}"  name="{{name}}"  type="number" placeholder="{{name}}"  required />'+
-        '<span class="errorInput" ng-show="myForm.{{name}}.$dirty && myForm.{{name}}.$invalid">'+
-        '<span ng-show="myForm.{{name}}.$error.required">{{name}}是必须。</span>'+
-        '</span>'+
         '</div>'+
         '</div>';
 
@@ -56,10 +49,7 @@ var app = angular.module('reactTestApp');
     var  time=    '<div ng-if='+timeIn+'  class="form-group">'+
         '<label class="col-sm-3 control-label">{{desc}}：</label>'+
         '<div class="col-sm-3">'+
-        '<input class="form-control timeClass" ng-click="timeClickFn($event.target)" value="{{content}}"  name="{{name}}"  type="text" placeholder="{{name}}"  required />'+
-        '<span class="errorInput" ng-show="myForm.{{name}}.$dirty && myForm.{{name}}.$invalid">'+
-        '<span ng-show="myForm.{{name}}.$error.required">{{name}}是必须。</span>'+
-        '</span>'+
+        '<input class="form-control timeClass" ng-click="timeClickFn($event)" value="{{content}}"  name="{{name}}"  type="text" placeholder="{{name}}"  required />'+
         '</div>'+
         '</div>';
 
@@ -68,11 +58,11 @@ var app = angular.module('reactTestApp');
     var fileNI = 'fieldType=="file"'
     var  file=  ' <div ng-if='+fileNI+'  class="form-group tAlign">'+
                         '<label class="col-sm-3 control-label">{{desc}}：</label>'+
-                        '<div  class="imgPreview" ng-click="addFileFn($event.target)">'+
+                        '<div  class="imgPreview" ng-click="addFileFn($event)">'+
                                '<img ng-if="content" ng-src="{{content}}">'+
                                '<i ng-if="!content" class="fa fa-plus addBtn"></i>'+
                           '</div>'+
-                          '<div class="btn btn-info uploadBtn"    ng-click="uploadFiles($event.target)"> 上传</div>'+
+                          '<div class="btn uploadBtn"    ng-click="uploadFiles($event)"> 上传</div>'+
                          '<input onchange="getImgDate(this)" url="{{content}}" class="fileInput none" id="{{name}}" name="{{name}}" type="file">'+
                  '</div>';
 
@@ -82,10 +72,7 @@ var app = angular.module('reactTestApp');
     var  textarea=    '<div ng-if='+textareaNI+'  class="form-group">'+
         '<label class="col-sm-3 control-label">{{desc}}：</label>'+
         '<div class="col-sm-9">'+
-        '<script id="{{name}}" type="text/plain" style="width:100%;height:800px;position:relative;" ></script>'+
-        '<span class="errorInput" ng-show="myForm.{{name}}.$dirty && myForm.{{name}}.$invalid">'+
-        '<span ng-show="myForm.{{name}}.$error.required">{{name}}是必须。</span>'+
-        '</span>'+
+        '<script id="my{{name}}" type="text/plain" style="width:100%;height:800px;position:relative;" ></script>'+
         '</div>'+
         '</div>';
 
@@ -138,10 +125,10 @@ var app = angular.module('reactTestApp');
                 scope.name = attrs.name;
                 scope.desc = attrs.desc;
                 scope.num = attrs.num;
-                if(attrs.type=='date'&&!isEmpty(attrs.content)){
+              if(attrs.type=='date'&&!isEmpty(attrs.content)){
                     scope.content = changeTime(attrs.content,"-");
                 }else if(attrs.type=='boolean'&&isEmpty(attrs.content)){
-                    scope.content = 0;
+                    scope.content = '0';
                 }else if(attrs.type=='enum'){
                     var enumList = scope.enumVals = attrs.enumval.split(",");
                     var hasEnumList = scope.content = attrs.content.split(",");
@@ -166,11 +153,11 @@ var app = angular.module('reactTestApp');
                 }
                 else if(scope.fieldType=="textarea"){
                     timer(function(){
-                        UE.getEditor(attrs.name);
+                        UE.getEditor('my'+attrs.name);
                         timer(function(){
-                            UE.getEditor(attrs.name).setContent(attrs.content,false);
+                            UE.getEditor('my'+attrs.name).setContent(attrs.content,false);
                         },100)
-                    },0);
+                    },100);
                 }else if(scope.fieldType=="filte"){
                         $http.get(apiUrl+"/res/filteList", {params: {}
                         }).success(function(data, status, headers, config) {
@@ -197,7 +184,8 @@ var app = angular.module('reactTestApp');
 
 
                 scope.isNeed = attrs.isNeed;
-                scope.addFileFn = function(target) {
+                scope.addFileFn = function(event) {
+                   var target = event.target;
                     var currClick = null;
                     if(isCurrClick(target)){
                         currClick = target;
@@ -206,7 +194,8 @@ var app = angular.module('reactTestApp');
                     }
                     currClick.nextSibling.nextSibling.click();
                 }
-                scope.uploadFiles = function(target){
+                scope.uploadFiles = function(event){
+                    var target = event.target
                     target.nextSibling.setAttribute("name","resImg");
                     target.nextSibling.setAttribute("id","resImg");
                     uploadImg(function(url){
@@ -217,14 +206,16 @@ var app = angular.module('reactTestApp');
                     },scope.$root)
                 }
 
-                scope.dateSeleFn = function(target){
+                scope.dateSeleFn = function(event){
+                    var target = event.target;
                     $(target).datetimepicker({
                         showSecond: true,
                         timeFormat: 'hh:mm:ss'
                     });
                     $(target).focus();
                 }
-                scope.timeClickFn = function(target){
+                scope.timeClickFn = function(event){
+                    var target = event.target;
                     $(target).timepicker({
                         showSecond: true,
                         timeFormat: 'hh:mm:ss'
@@ -234,7 +225,7 @@ var app = angular.module('reactTestApp');
                 }
 
             },
-            template:select+text+file+date+time+number+boolean+textarea+enumType+filte
+            template:select+textInput+file+date+time+number+boolean+textarea+enumType+filte
         }
     }]);
 
@@ -251,18 +242,6 @@ var app = angular.module('reactTestApp');
     }
 
 
-    app.directive("date1", function() {
-        return {
-            restrict:'AEC',
-            link:function(scope,el,attrs){
-                scope.value = changeTime1(attrs.value,"-");
-            },
-            template:'<span>{{value}}</span>'
-        }
-    });
-
-
-
 
 
 
@@ -273,10 +252,10 @@ var app = angular.module('reactTestApp');
               value:"@"
             },
             link:function(scope,el,attrs){
-                scope.value = changeTime(attrs.value,"-");
+                scope.value =attrs.value;
                 scope.$watch('value', function(newValue, oldValue) {
                     if(attrs.value!=0){
-                        scope.value = changeTime(attrs.value,"-");
+                        scope.value = attrs.value;
                     }else{
                         scope.value = "";
                     }
@@ -289,29 +268,12 @@ var app = angular.module('reactTestApp');
 
 
 
-    app.directive("mask", function() {
-        return {
-            restrict:'AEC',
-            link:function(scope,el,attrs){
-                scope.showMask = function(){
-                    this.maskShow = true;
-                }
-
-                scope.closeMask = function(){
-                    this.maskShow = false;
-                }
-            },
-            template:'<div ng-show="maskShow" class="Mask"></div>'
-        }
-    });
 
 
 
 
 
-
-function uploadImg(callbak,$rootScope){
-    //$rootScope.showLoading();
+function uploadImg(callbak){
     if(!$("input[name*='resImg']").get(0).files[0]){
         return;
     }
@@ -319,7 +281,7 @@ function uploadImg(callbak,$rootScope){
     $.ajaxFileUpload
     (
         {
-            url:apiUrl+'/res/uploadImg',//用于文件上传的服务器端请求 地址（本机为fxb.abc.com）
+            url:'/api/upload/uploadImg',//用于文件上传的服务器端请求 地址（本机为fxb.abc.com）
             secureuri:false,//一般设置为false
             fileElementId:"resImg",//文件上传空间的id属性  <input type="file" id="file" name="file" />
             dataType: 'jsonp',//返回值类型 一般设置为json
@@ -327,12 +289,10 @@ function uploadImg(callbak,$rootScope){
             jsonpCallback:'success_jsonpCallback',
             success: function (data, status)  //服务器成功响应处理函数
             {
-               // $rootScope.closeLoading();
                 callbak(data);
             },
             error: function (data, status, e)//服务器响应失败处理函数
             {
-                //$rootScope.closeLoading();
                 alert("上传失败，请重新上传");
             }
         }

@@ -6,20 +6,19 @@ var router = express.Router();
 var mysql = require('mysql');
 var db = require('../util/db.js');
 var url = require('url');
-
+var utilFn = require('../util/utilFn');
 router.post('/addRes', function(req, res, next) {
       tableName = 'res_content_'+req.body.name;
       var sql = "insert into res (name,cname,type_specification) values "+
         "('"+req.body.name+"','"+req.body.cname+"','"+ req.body.type_specification+"')";
        var tableSql =  'CREATE TABLE '+tableName+' ('+
                     'id int(11) NOT NULL AUTO_INCREMENT,'+
-                    'bucket varchar(45) NOT NULL,'+
                     'content longtext NOT NULL,'+
-                    'createTime timestamp NOT NULL,'+
-                    'modifiedTime timestamp NOT NULL,'+
+                    'createTime varchar(45) NOT NULL,'+
+                    'modifiedTime varchar(45) NOT NULL,'+
                     'isOnLine int(2) NOT NULL DEFAULT 1,'+
-                    'startTime timestamp NOT NULL ,'+
-                    'endTime timestamp NOT NULL,'+
+                    'startTime varchar(45) NOT NULL ,'+
+                    'endTime varchar(45) NOT NULL,'+
                     'PRIMARY KEY (id))';
 
         db.query(sql, function(err, rows, fields){
@@ -57,6 +56,33 @@ router.get('/getRes', function(req, res, next) {
         }
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify(rows));
+    });
+});
+
+
+
+router.post('/addResContent', function(req, res, next) {
+    tableName = 'res_content_'+req.body.name;
+    var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime) values "+
+        "('"+JSON.stringify(req.body.content)+"',from_unixtime("+req.body.startTime+"),from_unixtime("+ req.body.endTime+"),'"+ req.body.onLine+"',now(),now())";
+    db.query(sql, function(err, rows, fields){
+        if (err) {
+           return;
+        }else{
+            utilFn.successSend(res);
+        }
+    });
+});
+
+
+router.get('/getResContentList', function(req, res, next) {
+    var arg = url.parse(req.url, true).query
+    var sql = "select * from res_content_"+arg.name;
+    db.query(sql, function(err, rows, fields){
+        if (err) {
+            return;
+        }
+        utilFn.successSend(res,JSON.stringify(rows));
     });
 });
 

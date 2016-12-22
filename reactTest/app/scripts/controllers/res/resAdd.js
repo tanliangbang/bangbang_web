@@ -15,7 +15,7 @@ angular.module('reactTestApp')
       'AngularJS',
       'Karma'
     ];
-    var fieldType = ["text","file","time",'boolean','textarea','filte','enum','select']
+    var fieldType = ["text","file","date","time",'boolean','textarea','filte','enum','select']
     $scope.fields = [];
 
     $scope.fieldTypes = fieldType;
