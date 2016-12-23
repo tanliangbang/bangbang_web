@@ -41,9 +41,8 @@ angular.module('reactTestApp')
     }
 
     $scope.delResContent = function(index) {
-      console.log($scope);
       if (confirm("确认要删除？")) {
-        $http.post("/api/res/delResContent", {id: $scope.currItem.id,type:$scope.type}).success(function () {
+        $http.post("/api/res/delResContent", {id: $scope.currTypeContents[index].id,type:$scope.type}).success(function () {
           $scope.currTypeContents.splice(index,1)
           alert("删除成功");
         }).error(function (data) {
@@ -53,7 +52,7 @@ angular.module('reactTestApp')
     }
 
     $scope.editResContentFn = function(){
-      $location.path("resAddContent").search("type="+ $scope.type+"&id="+ $scope.id+"&resContentId="+$scope.currItem.id);
+      $location.path("resAddContent").search("type="+ $scope.type+"&id="+ $scope.id+"&resContentId="+$scope.currTypeContents[index].id);
     }
 
 
