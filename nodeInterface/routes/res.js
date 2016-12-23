@@ -82,7 +82,22 @@ router.get('/getResContentList', function(req, res, next) {
         if (err) {
             return;
         }
+        for(var i=0;i<rows.length;i++){
+            rows[i].content  = JSON.parse(rows[i].content);
+        }
         utilFn.successSend(res,JSON.stringify(rows));
+    });
+});
+
+router.post('/delResContent', function(req, res, next) {
+    var id =req.body.id;
+    var type = req.body.type;
+    var sql = "delete from res_content_"+type+" where id="+id;
+    db.query(sql, function(err, rows, fields){
+        if (err) {
+            return;
+        }
+        utilFn.successSend(res);
     });
 });
 

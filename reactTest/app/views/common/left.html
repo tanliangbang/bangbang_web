@@ -50,11 +50,11 @@
           <a href="index.html#"><i class="im-list4"></i> <span class="txt">资源管理</span></a>
           <ul class="sub">
             <li>
-              <a href="form-layout.html" ng-click="changeSub($event)"><i class="im-arrow-right3"></i> <span class="txt">资源列表</span></a>
+              <a href="#" ng-click="changeSub($event)"><i class="im-arrow-right3"></i> <span class="txt">资源列表</span></a>
 
               <ul class="hasSub">
                 <li ng-repeat="res in resList">
-                  <a href="resContentList/{{res.name}}?id={{res.id}}"> <span class="txt">{{res.cname}}</span></a>
+                  <a href="resContentList?type={{res.name}}&id={{res.id}}"> <span class="txt">{{res.cname}}</span></a>
                 </li>
 
               </ul>

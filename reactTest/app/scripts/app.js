@@ -35,7 +35,7 @@ angular
         controller: 'ResAddCtrl',
         controllerAs: 'resAdd'
       })
-      .when('/resContentList/:type', {
+      .when('/resContentList', {
         templateUrl: 'views/res/resContentList.html',
         controller: 'ResContentListCtrl',
         controllerAs: 'resContentList'

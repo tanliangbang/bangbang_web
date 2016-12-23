@@ -9,7 +9,7 @@
  * Controller of the reactTestApp
  */
 angular.module('reactTestApp')
-  .controller('ResContentListCtrl',['$scope','$http','$routeParams',function ($scope,$http,$routeParams) {
+  .controller('ResContentListCtrl',['$scope','$http','$routeParams','$location',function ($scope,$http,$routeParams,$location) {
     console.log($routeParams)
 
     this.awesomeThings = [
@@ -38,6 +38,22 @@ angular.module('reactTestApp')
       }).error(function (data, status, headers, congfig) {
         defer.reject(data);
       });
+    }
+
+    $scope.delResContent = function(index) {
+      console.log($scope);
+      if (confirm("确认要删除？")) {
+        $http.post("/api/res/delResContent", {id: $scope.currItem.id,type:$scope.type}).success(function () {
+          $scope.currTypeContents.splice(index,1)
+          alert("删除成功");
+        }).error(function (data) {
+          alert("删除失败");
+        });
+      }
+    }
+
+    $scope.editResContentFn = function(){
+      $location.path("resAddContent").search("type="+ $scope.type+"&id="+ $scope.id+"&resContentId="+$scope.currItem.id);
     }
 
 

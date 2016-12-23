@@ -12,7 +12,7 @@
  * Controller of the reactTestApp
  */
 angular.module('reactTestApp')
-  .controller('ResAddContentCtrl',['$scope','$http','$routeParams',function ($scope,$http,$routeParams) {
+  .controller('ResAddContentCtrl',['$scope','$http','$routeParams','$location',function ($scope,$http,$routeParams,$location) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -37,9 +37,9 @@ angular.module('reactTestApp')
 
     var id = $routeParams.id;
     $http.get("/api/res/getRes?id="+id).success(function(data,status,headers,congfig){
+
        $scope.currResType = currResType = data[0];
         fields = JSON.parse(currResType.type_specification);
-        console.log(fields)
         $scope.fields = fields;
         $scope.otherField = {};
         $scope.otherField.isOnLine = '1';
@@ -55,10 +55,14 @@ angular.module('reactTestApp')
     });
 
 
+
+
     $scope.submitResFn = function(){
       var content = {};
       var tempName = "";
-
+      if(!checkIsFill()){
+        return;
+      }
       for(var obj in fields){
           if(fields[obj].dataType=="text"||fields[obj].dataType=="time"||fields[obj].dataType=="number"){
             tempName ="input[name="+obj+"]";
@@ -76,7 +80,7 @@ angular.module('reactTestApp')
             content[obj] = tempName;
           }else if(fields[obj].dataType=="textarea") {
             tempName = "textarea[name=" + obj + "]";
-            content[obj] = UE.getEditor(obj).getContent();
+            content[obj] = UE.getEditor("my"+obj).getContent();
           }else if(fields[obj].dataType=="enum") {
             tempName ="input[type=checkbox]";
             var str = "";
@@ -90,14 +94,11 @@ angular.module('reactTestApp')
           }
       }
       commitResContentFn(content);
-
-
     }
 
     function commitResContentFn(content) {
-      console.log($scope.otherField);
         $http.post("/api/res/addResContent", {onLine:$scope.otherField.isOnLine,startTime:$scope.otherField.startTime,endTime:$scope.otherField.endTime,content:content,name:currResType.name}).success(function(){
-          $location.path("resList/"+resId);
+          $location.path("resContentList").search("type="+currResType.name+"&id="+$routeParams.id);
         }) .error(function(data) {
           alert("failure message:" + JSON.stringify({data:data}));
         });
@@ -105,3 +106,37 @@ angular.module('reactTestApp')
 
 
   }]);
+
+function checkIsFill(){
+  var isTrue = true;
+  $(".otherFields").each(function(){
+    var fileType = $(this).attr("data-type");
+    var isNeed = $(this).attr("data-isNeed");
+    var input = $(this).find("input");
+    if(isNeed==1){
+      switch(fileType){
+        case 'text':
+        case 'number':
+          if(isEmpty(input.val())){
+            isTrue = isTrue&&false;
+          }else{
+            isTrue = isTrue&&true;
+          }
+          break;
+        case 'file':
+          if(isEmpty(input.attr("url"))){
+            isTrue = isTrue&&false;
+            alert("请选择照片");
+          }else{
+            isTrue = isTrue&&true;
+          }
+          break;
+      }
+    }else{
+      isTrue = isTrue&&true;
+      input.removeAttr("required");
+    }
+  });
+
+  return isTrue;
+}
