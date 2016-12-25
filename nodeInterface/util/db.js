@@ -6,7 +6,8 @@ var pool  = mysql.createPool({
     host            : 'localhost',
     user            : 'root',
     password        : 'root',
-    database        : 'bangbang_web'
+    database        : 'bangbang_web',
+    charset: 'UTF8_GENERAL_CI'
 });
 
 db.query = function(sql, callback){
@@ -24,5 +25,9 @@ db.query = function(sql, callback){
 
         callback(null, rows, fields);
     });
-}
+};
+
+db.escape = mysql.escape;
+
+
 module.exports = db;  

@@ -36,21 +36,41 @@ angular.module('reactTestApp')
 
 
     var id = $routeParams.id;
+    var resContentId = $routeParams.resContentId;
     $http.get("/api/res/getRes?id="+id).success(function(data,status,headers,congfig){
-
-       $scope.currResType = currResType = data[0];
+        $scope.currResType = currResType = data[0];
         fields = JSON.parse(currResType.type_specification);
-        $scope.fields = fields;
-        $scope.otherField = {};
-        $scope.otherField.isOnLine = '1';
         UE.myObj = [];
       for(var obj in fields){
         if(fields[obj].dataType=="textarea"){
           UE.myObj.push(obj);
         }
       }
+        if(resContentId){
+            $http.get("/api/res/getResContentById?id="+resContentId+"&name="+$routeParams.type).success(function(data,status,headers,congfig){
+                var currdata =  $scope.otherField = data[0];
+//                currdata.startTime = changeTime(currdata.startTime,"-");
+//                currdata.endTime = changeTime(currdata.endTime,"-");
+                currdata.isOnLine = currdata.isOnLine+"";
+                var tempArr =[];
+                for(var obj in fields){
+                    tempArr.push(currdata.content);
+                }
+                $scope.editorContent = tempArr;
+                $scope.fields = fields;
+            });
 
-    }).error(function(data,status,headers,congfig){
+        }else{
+            $scope.fields = fields;
+            $scope.otherField = {};
+            $scope.otherField.isOnLine = '1';
+
+
+        }
+
+
+
+        }).error(function(data,status,headers,congfig){
       defer.reject(data);
     });
 
@@ -93,11 +113,12 @@ angular.module('reactTestApp')
             content[obj] = str;
           }
       }
-      commitResContentFn(content);
+
+        commitResContentFn(content);
     }
 
     function commitResContentFn(content) {
-        $http.post("/api/res/addResContent", {onLine:$scope.otherField.isOnLine,startTime:$scope.otherField.startTime,endTime:$scope.otherField.endTime,content:content,name:currResType.name}).success(function(){
+        $http.post("/api/res/addResContent", {onLine:$scope.otherField.isOnLine,startTime:$scope.otherField.startTime,endTime:$scope.otherField.endTime,content:JSON.stringify(content),name:currResType.name}).success(function(){
           $location.path("resContentList").search("type="+currResType.name+"&id="+$routeParams.id);
         }) .error(function(data) {
           alert("failure message:" + JSON.stringify({data:data}));

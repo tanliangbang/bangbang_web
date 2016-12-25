@@ -134,7 +134,7 @@ gulp.task('start:server', function() {
     root:[yeoman.temp, yeoman.app],
     livereload:true,
     port: 9000,
-    host: '192.168.1.117',
+    host: 'localhost',
     fallback: yeoman.app+ "/index.html",
     middleware:function(connect, opt){
       return [['/bower_components', connect["static"]('./bower_components')],

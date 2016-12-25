@@ -51,7 +51,7 @@ angular.module('reactTestApp')
       }
     }
 
-    $scope.editResContentFn = function(){
+    $scope.editResContentFn = function(index){
       $location.path("resAddContent").search("type="+ $scope.type+"&id="+ $scope.id+"&resContentId="+$scope.currTypeContents[index].id);
     }
 

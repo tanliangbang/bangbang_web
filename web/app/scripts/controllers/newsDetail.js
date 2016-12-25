@@ -19,8 +19,9 @@ angular.module('webApp')
     ];
     $rootScope.isActive = 2;
     var id = $routeParams.id;
-    $http.get("/api/article/getArticleDetail?id="+id).success(function(data,status,headers,congfig){
-      $scope.newsDetail = data[0];
+    var name = $routeParams.name;
+    $http.get("/api/res/getResContentById?id="+id+"&name="+name).success(function(data,status,headers,congfig){
+      $scope.newsDetail = data[0].content;
       $scope.newsDetail.content = $sce.trustAsHtml($scope.newsDetail.content)
     }).error(function(data,status,headers,congfig){
       defer.reject(data);

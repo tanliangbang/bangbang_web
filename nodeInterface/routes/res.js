@@ -14,11 +14,11 @@ router.post('/addRes', function(req, res, next) {
        var tableSql =  'CREATE TABLE '+tableName+' ('+
                     'id int(11) NOT NULL AUTO_INCREMENT,'+
                     'content longtext NOT NULL,'+
-                    'createTime varchar(45) NOT NULL,'+
-                    'modifiedTime varchar(45) NOT NULL,'+
+                    'createTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
+                    'modifiedTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
                     'isOnLine int(2) NOT NULL DEFAULT 1,'+
-                    'startTime varchar(45) NOT NULL ,'+
-                    'endTime varchar(45) NOT NULL,'+
+                    'startTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
+                    'endTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
                     'PRIMARY KEY (id))';
 
         db.query(sql, function(err, rows, fields){
@@ -27,7 +27,6 @@ router.post('/addRes', function(req, res, next) {
                 return;
             }else{
                 db.query(tableSql,function(err, rows, fields){
-                    console.log(rows);
                 });
             }
         });
@@ -48,7 +47,6 @@ router.get('/getResList', function(req, res, next) {
 
 router.get('/getRes', function(req, res, next) {
     var arg = url.parse(req.url, true).query
-    console.log(arg);
     var sql = "select * from res where id =" + arg.id;
     db.query(sql, function(err, rows, fields){
         if (err) {
@@ -62,9 +60,11 @@ router.get('/getRes', function(req, res, next) {
 
 
 router.post('/addResContent', function(req, res, next) {
-    tableName = 'res_content_'+req.body.name;
+
+    var tableName = 'res_content_'+req.body.name;
     var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime) values "+
-        "('"+JSON.stringify(req.body.content)+"',from_unixtime("+req.body.startTime+"),from_unixtime("+ req.body.endTime+"),'"+ req.body.onLine+"',now(),now())";
+        "("+db.escape(req.body.content)+",from_unixtime("+req.body.startTime+"),from_unixtime("+ req.body.endTime+"),'"+ req.body.onLine+"',now(),now())";
+    console.log(sql)
     db.query(sql, function(err, rows, fields){
         if (err) {
            return;
@@ -100,6 +100,20 @@ router.post('/delResContent', function(req, res, next) {
         utilFn.successSend(res);
     });
 });
+
+router.get('/getResContentById', function(req, res, next) {
+    var arg = url.parse(req.url, true).query
+    var sql = "select * from res_content_"+arg.name +" where id ="+arg.id;
+    db.query(sql, function(err, rows, fields){
+        if (err) {
+            return;
+        }
+        rows[0].content = JSON.parse(rows[0].content)
+        utilFn.successSend(res,JSON.stringify(rows));
+    });
+});
+
+
 
 
 module.exports = router;

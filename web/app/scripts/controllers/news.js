@@ -15,7 +15,8 @@ angular.module('webApp')
       'Karma'
     ];
     $rootScope.isActive = 2;
-    $http.get("/api/article/getArticleList").success(function(data,status,headers,congfig){
+    $scope.name = 'article';
+    $http.get("/api/res/getResContentList?name=article").success(function(data,status,headers,congfig){
       $scope.newsList = data;
     }).error(function(data,status,headers,congfig){
       defer.reject(data);

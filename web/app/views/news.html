@@ -42,7 +42,7 @@
                 <h4><i class="fa fa-globe"></i>前端技术</h4>
               </div>
               <div class="widget-body">
-                <a class="alink" href="newsDetail?id={{item.id}}" ng-repeat="item in newsList">{{item.title}}</a>
+                <a class="alink" href="newsDetail?id={{item.id}}&name={{name}}" ng-repeat="item in newsList">{{item.content.name}}</a>
               </div>
             </div>
 
