@@ -15,12 +15,11 @@ router.post('/addRes', function(req, res, next) {
                     'id int(11) NOT NULL AUTO_INCREMENT,'+
                     'content longtext NOT NULL,'+
                     'createTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
-                    'modifiedTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
+                    'modifiedTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'isOnLine int(2) NOT NULL DEFAULT 1,'+
-                    'startTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
-                    'endTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
+                    'startTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
+                    'endTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'PRIMARY KEY (id))';
-
         db.query(sql, function(err, rows, fields){
             if (err) {
                 console.log(err);
@@ -30,6 +29,17 @@ router.post('/addRes', function(req, res, next) {
                 });
             }
         });
+});
+
+router.post('/delRes', function(req, res, next) {
+    var sql = "delete from res where id ="+res.body.id;
+    db.query(sql, function(err, rows, fields){
+        if (err) {
+            return;
+        }
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(rows));
+    });
 });
 
 
@@ -60,10 +70,9 @@ router.get('/getRes', function(req, res, next) {
 
 
 router.post('/addResContent', function(req, res, next) {
-
     var tableName = 'res_content_'+req.body.name;
-    var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime) values "+
-        "("+db.escape(req.body.content)+",from_unixtime("+req.body.startTime+"),from_unixtime("+ req.body.endTime+"),'"+ req.body.onLine+"',now(),now())";
+    var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime) values ("+
+        db.escape(req.body.content)+",from_unixtime("+req.body.startTime+"),from_unixtime("+ req.body.endTime+"),"+ req.body.onLine+",now(),now())";
     console.log(sql)
     db.query(sql, function(err, rows, fields){
         if (err) {
@@ -75,9 +84,34 @@ router.post('/addResContent', function(req, res, next) {
 });
 
 
+router.post('/UpdateResContent', function(req, res, next) {
+    var tableName = 'res_content_'+req.body.name;
+
+    var sql =  "update "+tableName+" set content="+ db.escape(req.body.content)+",startTime="+"from_unixtime("+req.body.startTime+"),endTime=" +
+        "from_unixtime("+ req.body.endTime+"),isOnline="+req.body.onLine+",modifiedTime=now() where id = "+req.body.resContentId;
+    console.log(sql)
+    db.query(sql, function(err, rows, fields){
+        if (err) {
+            return;
+        }else{
+            utilFn.successSend(res);
+        }
+    });
+});
+
+
 router.get('/getResContentList', function(req, res, next) {
     var arg = url.parse(req.url, true).query
-    var sql = "select * from res_content_"+arg.name;
+    var start = 0;
+    var end = 10;
+    if(arg.start){
+        start = arg.start;
+    }
+    if(arg.size){
+        end = arg.size;
+    }
+    var sql = "select * from res_content_"+arg.name + " limit "+start+","+end;
+    var totalSql = "select count(id) as total from res_content_"+arg.name
     db.query(sql, function(err, rows, fields){
         if (err) {
             return;
@@ -85,7 +119,15 @@ router.get('/getResContentList', function(req, res, next) {
         for(var i=0;i<rows.length;i++){
             rows[i].content  = JSON.parse(rows[i].content);
         }
-        utilFn.successSend(res,JSON.stringify(rows));
+        var content =rows;
+        db.query(totalSql, function(err, rows, fields){
+            if (err) {
+                return;
+            }
+            var data={content:content,pageTotal:rows[0].total}
+            utilFn.successSend(res,JSON.stringify(data));
+        });
+
     });
 });
 

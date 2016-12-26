@@ -2,8 +2,10 @@
      <div ng-include="'views/common/nav.html'"></div>
      <div class="content-inner">
 
-
-
+       <div class="t-center btnMargin">
+         <a class="btn btn-teal" href="#" >修&nbsp;改&nbsp;类&nbsp;型</a>
+         <a class="btn btn-teal" href="#" ng-click="resDeleteFn()" >删&nbsp;除&nbsp;类&nbsp;型</a>
+       </div>
        <div class="box border mytable">
          <div class="box-title">
            <h4>{{currItem.cname}}<span class="litterDesc">({{currItem.name}})</span>列表</h4>
@@ -50,7 +52,9 @@
              </tbody>
            </table>
 
-
+           <div class="pageSelect">
+             <pagination conf="paginationConf"></pagination>
+           </div>
 
            <div class="t-center btnMargin">
              <a class="btn btn-teal" href="resAddContent?type={{type}}&id={{id}}" >添&nbsp;加&nbsp;数&nbsp;据</a>

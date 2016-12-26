@@ -5,9 +5,20 @@ app.directive('datetimepicker', function() {
     require: 'ngModel',
     link: function(scope, element, attrs, ngModel) {
       $(element).datetimepicker({
-        showSecond: true,
-        timeFormat: 'hh:mm:ss'
+        timeFormat: 'hh:mm:ss',
+        dateFormat: 'yy-mm-dd',
+        changeYear:true,
+        beforeShow: function () {
+          setTimeout(function () {
+            $('#ui-datepicker-div').css("z-index", 1000);
+          }, 100);
+        }
       });
+      setTimeout(function(){
+        if(ngModel.$viewValue){
+          ngModel.$setViewValue(new Date(ngModel.$viewValue).getTime());
+        }
+      },100)
       element[0].onchange =function(val){
         ngModel.$setViewValue(val.timeStamp);
         scope.$apply()

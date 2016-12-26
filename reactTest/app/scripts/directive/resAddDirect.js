@@ -8,7 +8,7 @@ var app = angular.module('reactTestApp');
     var  date=    '<div ng-if='+dateNI+'  class="form-group">'+
         '<label class="col-sm-3 control-label">{{desc}}：</label>'+
         '<div class="col-sm-3">'+
-        '<input class="form-control pickerDate" ng-click="dateSeleFn($event)" value="{{content}}"  name="{{name}}"  type="text" placeholder="{{name}}"  required />'+
+        '<input class="form-control"  ng-click="dateSeleFn($event)" value="{{content}}"  name="{{name}}"  type="text" placeholder="{{name}}"  required />'+
         '</div>'+
         '</div>';
 
@@ -209,8 +209,14 @@ var app = angular.module('reactTestApp');
                 scope.dateSeleFn = function(event){
                     var target = event.target;
                     $(target).datetimepicker({
-                        showSecond: true,
-                        timeFormat: 'hh:mm:ss'
+                      timeFormat: 'hh:mm:ss',
+                      dateFormat: 'yy-mm-dd',
+                      changeYear:true,
+                      beforeShow: function () {
+                        setTimeout(function () {
+                          $('#ui-datepicker-div').css("z-index", 1000);
+                        }, 100);
+                      }
                     });
                     $(target).focus();
                 }
@@ -252,10 +258,10 @@ var app = angular.module('reactTestApp');
               value:"@"
             },
             link:function(scope,el,attrs){
-                scope.value =attrs.value;
+                scope.value =changeTime(attrs.value,"-");
                 scope.$watch('value', function(newValue, oldValue) {
                     if(attrs.value!=0){
-                        scope.value = attrs.value;
+                        scope.value = changeTime(attrs.value,"-");
                     }else{
                         scope.value = "";
                     }

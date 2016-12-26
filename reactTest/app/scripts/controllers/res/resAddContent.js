@@ -21,6 +21,7 @@ angular.module('reactTestApp')
     var currResType = null;
     var fields  = null;
     $(".pickerDate").datetimepicker({
+       format: 'yyyy-mm-dd',
         beforeShow: function () {
           setTimeout(function () {
               $('#ui-datepicker-div').css("z-index", 1000);
@@ -36,7 +37,7 @@ angular.module('reactTestApp')
 
 
     var id = $routeParams.id;
-    var resContentId = $routeParams.resContentId;
+    var resContentId =  $scope.resContentId = $routeParams.resContentId;
     $http.get("/api/res/getRes?id="+id).success(function(data,status,headers,congfig){
         $scope.currResType = currResType = data[0];
         fields = JSON.parse(currResType.type_specification);
@@ -49,8 +50,8 @@ angular.module('reactTestApp')
         if(resContentId){
             $http.get("/api/res/getResContentById?id="+resContentId+"&name="+$routeParams.type).success(function(data,status,headers,congfig){
                 var currdata =  $scope.otherField = data[0];
-//                currdata.startTime = changeTime(currdata.startTime,"-");
-//                currdata.endTime = changeTime(currdata.endTime,"-");
+                currdata.startTime = changeTime(currdata.startTime,"-");
+                currdata.endTime = changeTime(currdata.endTime,"-");
                 currdata.isOnLine = currdata.isOnLine+"";
                 var tempArr =[];
                 for(var obj in fields){
@@ -95,8 +96,7 @@ angular.module('reactTestApp')
             content[obj] = $(tempName).attr("url");
           }else if(fields[obj].dataType=="date"){
             tempName ="input[name="+obj+"]";
-            tempName = getTimeStamp($(tempName).val());
-            tempName = tempName.substr(0, tempName.length - 3);
+            tempName = $(tempName).val();
             content[obj] = tempName;
           }else if(fields[obj].dataType=="textarea") {
             tempName = "textarea[name=" + obj + "]";
@@ -118,11 +118,20 @@ angular.module('reactTestApp')
     }
 
     function commitResContentFn(content) {
-        $http.post("/api/res/addResContent", {onLine:$scope.otherField.isOnLine,startTime:$scope.otherField.startTime,endTime:$scope.otherField.endTime,content:JSON.stringify(content),name:currResType.name}).success(function(){
-          $location.path("resContentList").search("type="+currResType.name+"&id="+$routeParams.id);
-        }) .error(function(data) {
-          alert("failure message:" + JSON.stringify({data:data}));
-        });
+        if($scope.resContentId){
+            $http.post("/api/res/UpdateResContent", {resContentId:$scope.resContentId,onLine:$scope.otherField.isOnLine,startTime:$scope.otherField.startTime,endTime:$scope.otherField.endTime,content:JSON.stringify(content),name:currResType.name}).success(function(){
+               $location.path("resContentList").search("type="+currResType.name+"&id="+$routeParams.id);
+            }) .error(function(data) {
+              alert("failure message:" + JSON.stringify({data:data}));
+            });
+        }else{
+          $http.post("/api/res/addResContent", {onLine:$scope.otherField.isOnLine,startTime:$scope.otherField.startTime,endTime:$scope.otherField.endTime,content:JSON.stringify(content),name:currResType.name}).success(function(){
+            $location.path("resContentList").search("type="+currResType.name+"&id="+$routeParams.id);
+          }) .error(function(data) {
+            alert("failure message:" + JSON.stringify({data:data}));
+          });
+        }
+
       }
 
 
