@@ -3,7 +3,7 @@
      <div class="content-inner">
 
        <div class="t-center btnMargin">
-         <a class="btn btn-teal" href="#" >修&nbsp;改&nbsp;类&nbsp;型</a>
+         <a class="btn btn-teal" href="#" ng-click="editResContentFn()">修&nbsp;改&nbsp;类&nbsp;型</a>
          <a class="btn btn-teal" href="#" ng-click="resDeleteFn()" >删&nbsp;除&nbsp;类&nbsp;型</a>
        </div>
        <div class="box border mytable">
@@ -42,8 +42,10 @@
                <td><date value="{{currdata.modifiedTime}}"></date></td>
                <td>{{currdata.isOnLine==0?"否":"是"}}</td>
                <td>
+<!--
                  <a class="btn btn-success hover-link colorbox-button mgr-10 cboxElement operaBtn" ng-click="descFn()" title="详情"><i class="fa fa-arrow-circle-o-right fa-1x"></i></a>
-                 <a class="btn btn-success hover-link mgr-10 operaBtn" ng-click="editResContentFn($index)" title="修改"><i class="fa fa-edit fa-1x"></i></a>
+-->
+                 <a class="btn btn-success hover-link mgr-10 operaBtn" ng-click="editResFn($index)" title="修改"><i class="fa fa-edit fa-1x"></i></a>
                  <a class="btn btn-success hover-link colorbox-button cboxElement operaBtn" ng-click="delResContent($index)" title="删除"><i class="fa fa-minus fa-1x"></i></a>
 
 

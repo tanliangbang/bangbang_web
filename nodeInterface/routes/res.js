@@ -25,20 +25,37 @@ router.post('/addRes', function(req, res, next) {
                 console.log(err);
                 return;
             }else{
-                db.query(tableSql,function(err, rows, fields){
+                db.query(tableSql, function(err, rows, fields) {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
+                    utilFn.successSend(res);
                 });
             }
         });
 });
 
+router.post('/updateRes', function(req, res, next) {
+    var sql = "update res set name='"+req.body.name+"',cname='"+req.body.cname+"',type_specification='"+req.body.type_specification
+    +"' where id = "+req.body.id;
+    db.query(sql, function(err, rows, fields){
+        if (err) {
+            console.log(err);
+            return;
+        }
+        utilFn.successSend(res);
+    });
+});
+
+
 router.post('/delRes', function(req, res, next) {
-    var sql = "delete from res where id ="+res.body.id;
+    var sql = "delete from res where id ="+req.body.id;
     db.query(sql, function(err, rows, fields){
         if (err) {
             return;
         }
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify(rows));
+        utilFn.successSend(res);
     });
 });
 
@@ -49,8 +66,7 @@ router.get('/getResList', function(req, res, next) {
         if (err) {
             return;
         }
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify(rows));
+        utilFn.successSend(res,JSON.stringify(rows));
     });
 });
 
@@ -62,8 +78,7 @@ router.get('/getRes', function(req, res, next) {
         if (err) {
             return;
         }
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify(rows));
+        utilFn.successSend(res,JSON.stringify(rows));
     });
 });
 
@@ -73,7 +88,6 @@ router.post('/addResContent', function(req, res, next) {
     var tableName = 'res_content_'+req.body.name;
     var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime) values ("+
         db.escape(req.body.content)+",from_unixtime("+req.body.startTime+"),from_unixtime("+ req.body.endTime+"),"+ req.body.onLine+",now(),now())";
-    console.log(sql)
     db.query(sql, function(err, rows, fields){
         if (err) {
            return;
@@ -89,7 +103,6 @@ router.post('/UpdateResContent', function(req, res, next) {
 
     var sql =  "update "+tableName+" set content="+ db.escape(req.body.content)+",startTime="+"from_unixtime("+req.body.startTime+"),endTime=" +
         "from_unixtime("+ req.body.endTime+"),isOnline="+req.body.onLine+",modifiedTime=now() where id = "+req.body.resContentId;
-    console.log(sql)
     db.query(sql, function(err, rows, fields){
         if (err) {
             return;

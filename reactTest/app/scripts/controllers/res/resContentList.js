@@ -18,6 +18,7 @@ angular.module('reactTestApp')
     $scope.type = $routeParams.type;
     $scope.id = $routeParams.id;
 
+    window.localStorage.currentPage = 1;
     $scope.paginationConf = {
       currentPage: 1,
       totalItems: 0,
@@ -82,7 +83,7 @@ angular.module('reactTestApp')
       }
     }
 
-    $scope.editResContentFn = function(index){
+    $scope.editResFn = function(index){
       $location.path("resAddContent").search("type="+ $scope.type+"&id="+ $scope.id+"&resContentId="+$scope.currTypeContents[index].id);
     }
 
@@ -103,6 +104,14 @@ angular.module('reactTestApp')
 
       }
     }
+
+
+
+    $scope.editResContentFn = function(){
+       $location.path("resAdd").search("id="+ $scope.id);
+    }
+
+
 
 
 

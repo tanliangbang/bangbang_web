@@ -107,7 +107,7 @@ gulp.task('clean:tmp', function (cb) {
 });
 
 gulp.task('start:client', ['start:server', 'styles', 'lint:scripts'], function () {
-  openURL('http://localhost:9000');
+  openURL('http://localhost:9001');
 });
 
 
@@ -133,7 +133,7 @@ gulp.task('start:server', function() {
   $.connect.server({
     root:[yeoman.temp, yeoman.app],
     livereload:true,
-    port: 9000,
+    port: 9001,
     host: 'localhost',
     fallback: yeoman.app+ "/index.html",
     middleware:function(connect, opt){

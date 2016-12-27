@@ -9,16 +9,16 @@
  * Controller of the reactTestApp
  */
 angular.module('reactTestApp')
-  .controller('ResAddCtrl',['$scope','$http',function ($scope,$http) {
+  .controller('ResAddCtrl',['$scope','$http','$routeParams','$location',function ($scope,$http,$routeParams,$location) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
     var fieldType = ["text","file","date","time",'boolean','textarea','filte','enum','select']
-    $scope.fields = [];
-
+    $scope.id = $routeParams.id;
     $scope.fieldTypes = fieldType;
+
     $scope.showAddFieldFn = function(){
       $scope.showMask();
       $scope.fileFormShow = true;
@@ -30,6 +30,29 @@ angular.module('reactTestApp')
       $scope.dataIsNeed= '1';
       $scope.enumVal = "";
     }
+
+    var currResType = null;
+
+    if($scope.id) {
+      $http.get("/api/res/getRes", {
+        params: {id: $scope.id}
+      }).success(function (data) {
+        currResType = data[0];
+        $scope.fields = analysisField(currResType.type_specification);
+        $scope.res_desc = currResType.cname;
+        $scope.res_name = currResType.name;
+      }).error(function (data, status, headers, congfig) {
+        defer.reject(data);
+      });
+
+    }else{
+      $scope.fields = [];
+    }
+
+
+
+
+
 
     var arr = [];
     var currFile={};
@@ -101,41 +124,44 @@ angular.module('reactTestApp')
     $scope.addResFn = function(){
       var describe = $scope.res_desc;
       var name = $scope.res_name;
-
       if(isEmpty(describe)||isEmpty(name)){
         return;
       }
-
-      if($scope.fields.length<1){
+      if(!$scope.fields||$scope.fields.length<1){
         alert("请添加字段");
         return;
       }
-
       var type_specification = deal_fieldFn($scope.fields);
-
+      if($scope.id){
+          $http.post("/api/res/updateRes", {id:$scope.id,name:name,cname:describe,type_specification:type_specification}).success(function(responseData) {
+            $location.path("resList");
+          });
+      }else{
         $http.post("/api/res/addRes", {name:name,cname:describe,type_specification:type_specification}).success(function(responseData) {
-          $location.path("resList/");
-
+           $location.path("resList");
         });
+      }
 
-    /*
-        var transform = function(data){
-          return $.param(data);
-        }
-        $http.post(apiUrl+"/res/add", {type:$routeParams.type,name:name,cname:describe,type_specification:type_specification
-        }, {
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-          transformRequest: transform
-        }).success(function(responseData) {
-          $location.path("/");
-          window.location.reload();
-        });
-      */
 
     }
 
 
+    function analysisField(obj){
+      var arr = [];
+      obj = JSON.parse(obj);
+      for(var curr in obj){
+        arr.push(fieldObjToArr(curr,obj[curr]));
+      }
+      return arr;
+    }
 
+    function fieldObjToArr(name,filed){
+      var fieldObj = {"name":name};
+      for(var obj in filed){
+        fieldObj[obj] = filed[obj];
+      }
+      return fieldObj;
+    }
 
 
 

@@ -165,8 +165,8 @@
       </div>
 
       <div class="t-center mgb20">
-        <button ng-if="!isEditField" type="submit" ng-click="addFileBtnFn()" class="btn btn-success ng-scope">添&nbsp;&nbsp;&nbsp;&nbsp;加</button>
-        <button ng-if="isEditField" type="submit" ng-click="addFileBtnFn()" class="btn btn-success ng-scope">修&nbsp;&nbsp;&nbsp;&nbsp;改</button>
+        <button ng-if="!$scope.id" type="submit" ng-click="addFileBtnFn()" class="btn btn-success ng-scope">添&nbsp;&nbsp;&nbsp;&nbsp;加</button>
+        <button ng-if="$scope.id" type="submit" ng-click="addFileBtnFn()" class="btn btn-success ng-scope">修&nbsp;&nbsp;&nbsp;&nbsp;改</button>
 
       </div>
 
