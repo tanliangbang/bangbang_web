@@ -21,3 +21,25 @@ app.filter('cut', function () {
     return value + (tail || ' …');
   };
 });
+
+
+
+app.directive("date", function() {
+  return {
+    restrict:'AEC',
+    scope:{
+      value:"@"
+    },
+    link:function(scope,el,attrs){
+      scope.value =changeTime(attrs.value,"-");
+      scope.$watch('value', function(newValue, oldValue) {
+        if(attrs.value!=0){
+          scope.value = changeTime(attrs.value,"-");
+        }else{
+          scope.value = "";
+        }
+      });
+    },
+    template:'<span>{{value}}</span>'
+  }
+});

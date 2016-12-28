@@ -1,13 +1,28 @@
 <div class="container mgt_20">
   <div class="headerDiv"></div>
 
-    <div id="content" class="row-fluid newsDetail">
+    <div id="content" class="row-fluid">
       <div class="row">
-              <div class="col-md-8 newsContent">
-                  <div class="whitebg paddding_20 boxShow">
-                        <p class="title">{{newsDetail.title}}</p>
-                        <div ng-bind-html = "newsDetail.content"></div>
+              <div class="col-md-8">
+                  <div class="list1 padding_10_20 boxShow mgb_20 whitebg" ng-repeat="item in newsList" ng-click="toDetail()">
+                      <div class="row">
+                              <div class="col-md-5 list1_left">
+                                    <img  src ="{{item.content.titleImg}}">
+                               </div>
+                               <div class="col-md-7 list1_right">
+                                   <p class="title">{{item.content.title}}</p>
+                                   <p class="content">{{item.content.breif}}</p>
+                                   <div class="bottom_left">
+                                     阅读量:{{item.readyNum}}
+                                   </div>
+                                    <div class="bottom_right">
+                                         <date value="{{item.createTime}}"></date>
+                                    </div>
+                               </div>
+                       </div>
                   </div>
+
+
               </div>
 
           <div  class="col-md-4">

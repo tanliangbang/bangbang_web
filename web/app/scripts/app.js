@@ -15,29 +15,30 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/index.html',
+        controller: 'IndexCtrl',
+        controllerAs: 'index'
       })
       .when('/index', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/index.html',
+        controller: 'IndexCtrl',
+        controllerAs: 'index'
       })
-      .when('/news', {
-        templateUrl: 'views/news.html',
-        controller: 'NewsCtrl',
-        controllerAs: 'news'
+      .when('/jsRes', {
+        templateUrl: 'views/article/jsRes.html',
+        controller: 'jsResCtrl',
+        controllerAs: 'jsRes'
       })
-      .when('/newsDetail', {
-        templateUrl: 'views/newsDetail.html',
-        controller: 'NewsDetailCtrl',
-        controllerAs: 'newsDetail'
+      .when('/articleDetail', {
+        templateUrl: 'views/article/articleDetail.html',
+        controller: 'articleDetailCtrl',
+        controllerAs: 'articleDetail'
       })
       .otherwise({
         redirectTo: '/'

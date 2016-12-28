@@ -11,12 +11,13 @@
  * Controller of the webApp
  */
 angular.module('webApp')
-  .controller('NewsDetailCtrl',['$scope','$http','$routeParams','$sce','$rootScope', function ($scope,$http,$routeParams,$sce,$rootScope) {
+  .controller('articleDetailCtrl',['$scope','$http','$routeParams','$sce','$rootScope', function ($scope,$http,$routeParams,$sce,$rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
     $rootScope.isActive = 2;
     var id = $routeParams.id;
     var name = $routeParams.name;

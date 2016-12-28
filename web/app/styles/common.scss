@@ -24,12 +24,32 @@
   padding:20px;
 }
 
+.paddinglr_15{
+  padding:0px 15px;
+}
+
+.padding_10_20{
+  padding:10px 20px;
+}
+
 .mgb_20{
    margin-bottom:20px;
 }
 
 .mgt_20{
   margin-top:20px;
+}
+
+.margin_0{
+  margin:0px;
+}
+.padding_0{
+  padding:0px;
+}
+
+.titleDiv{
+  margin-bottom:10px;
+  margin-top:0px;
 }
 
 
@@ -41,4 +61,39 @@
 
 .height_full{
   height:100%;
+}
+
+
+.list1{
+   position:relative;
+  cursor: pointer;
+   .title{
+      font-size:20px;
+     font-weight:bold;
+     color:#337ab7;
+   }
+  .content{
+    font-size:14px;
+  }
+   img{
+     width:100%;
+     height:200px;
+   }
+  .bottom_right{
+    bottom:0px;
+    height:30px;
+    position:absolute;
+    right:10px;
+    color:#337ab7;
+  }
+  .bottom_left{
+    bottom:0px;
+    height:30px;
+    position:absolute;
+    left:10px;
+    color:#337ab7;
+  }
+  .list1_right{
+    height:200px;
+  }
 }

@@ -17,6 +17,7 @@ router.post('/addRes', function(req, res, next) {
                     'createTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
                     'modifiedTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'isOnLine int(2) NOT NULL DEFAULT 1,'+
+                    'readyNum int(11) NOT NULL DEFAULT 0,'+
                     'startTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'endTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'PRIMARY KEY (id))';
@@ -159,11 +160,18 @@ router.post('/delResContent', function(req, res, next) {
 router.get('/getResContentById', function(req, res, next) {
     var arg = url.parse(req.url, true).query
     var sql = "select * from res_content_"+arg.name +" where id ="+arg.id;
+    var updateSql = "update res_content_"+arg.name +" set readyNum = "
     db.query(sql, function(err, rows, fields){
         if (err) {
             return;
         }
-        rows[0].content = JSON.parse(rows[0].content)
+        rows[0].content = JSON.parse(rows[0].content);
+        updateSql = updateSql + (parseInt(rows[0].readyNum)+1)+" where id ="+arg.id;
+        db.query(updateSql, function(err, rows, fields) {
+            if (err) {
+                return;
+            }
+        });
         utilFn.successSend(res,JSON.stringify(rows));
     });
 });

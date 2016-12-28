@@ -8,16 +8,31 @@
  * Controller of the webApp
  */
 angular.module('webApp')
-  .controller('NewsCtrl',['$scope','$http','$rootScope', function ($scope,$http,$rootScope) {
+  .controller('IndexCtrl',['$scope','$http','$rootScope', function ($scope,$http,$rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-    $rootScope.isActive = 2;
+
+
+    $scope.myInterval = 2000;
+    $scope.noWrapSlides = false;
+    var slides = $scope.slides = [];
+
+
+    $rootScope.isActive = 1;
     $scope.name = 'jsRes';
     $http.get("/api/res/getResContentList",{params: {name:"jsRes"}}).success(function(data,status,headers,congfig){
       $scope.newsList = data.content;
+
+
+      $scope.addSlide = function () {
+        var newWidth = 600 + slides.length + 1;
+      };
+      $scope.addSlide();
+
+
     }).error(function(data,status,headers,congfig){
       defer.reject(data);
     });;
