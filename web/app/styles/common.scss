@@ -52,6 +52,10 @@
   margin-top:0px;
 }
 
+.padding_right_15{
+  padding-right:15px;
+}
+
 
 .boxShow{
   -webkit-box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
@@ -95,5 +99,16 @@
   }
   .list1_right{
     height:200px;
+  }
+}
+
+
+.list2{
+  img{
+    width:100%;
+  }
+  .col-md-4{
+    padding:0px;
+    margin:0px;
   }
 }

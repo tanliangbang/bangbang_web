@@ -40,6 +40,11 @@ angular
         controller: 'articleDetailCtrl',
         controllerAs: 'articleDetail'
       })
+      .when('/htmlRes', {
+        templateUrl: 'views/article/htmlRes.html',
+        controller: 'htmlResCtrl',
+        controllerAs: 'htmlRes'
+      })
       .otherwise({
         redirectTo: '/'
       });
