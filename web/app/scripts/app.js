@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'infinite-scroll'
   ])
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider

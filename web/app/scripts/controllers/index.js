@@ -26,13 +26,6 @@ angular.module('webApp')
     $http.get("/api/res/getResContentList",{params: {name:"jsRes"}}).success(function(data,status,headers,congfig){
       $scope.newsList = data.content;
 
-
-      $scope.addSlide = function () {
-        var newWidth = 600 + slides.length + 1;
-      };
-      $scope.addSlide();
-
-
     }).error(function(data,status,headers,congfig){
       defer.reject(data);
     });;

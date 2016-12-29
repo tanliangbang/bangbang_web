@@ -2,9 +2,9 @@
   <div class="headerDiv"></div>
 
     <div id="content" class="row-fluid">
-      <div class="row">
+      <div class="row" infinite-scroll='loadMore()' infinite-scroll-distance='0' infinite-scroll-disabled='loading'>
               <div class="col-md-8">
-                  <div class="list1 padding_10_20 boxShow mgb_20 whitebg" ng-repeat="item in newsList" ng-click="toDetail()">
+                  <div class="list1 padding_10_20 boxShow mgb_20 whitebg listAnimation1" ng-repeat="item in newsList" ng-click="toDetail()">
                       <div class="row">
                               <div class="col-md-5 list1_left">
                                     <img  src ="{{item.content.titleImg}}">

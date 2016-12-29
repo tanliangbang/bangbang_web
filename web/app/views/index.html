@@ -3,14 +3,14 @@
   <div class="container">
     <div class="headerDiv"></div>
         <div class="model row model1 mgt_20">
-             <div class="col-md-8 height_full">
+             <div class="col-md-8 height_full ">
 
-                 <div class="scrollImgClass whitebg paddding_20 boxShow mgb_20">
-                   <div style="height: 305px">
-                     <carousel interval="myInterval" no-wrap="noWrapSlides">
+                 <div class="scrollImgClass whitebg paddding_20 boxShow mgb_20" >
+                   <div >
+                     <carousel  no-wrap="noWrapSlides" >
                        <slide  ng-repeat="item in newsList" active="slide.active">
-                         <img ng-src="{{item.content.titleImg}}" style="margin:auto;">
-                         <div class="carousel-caption">
+                         <img ng-src="{{item.content.titleImg}}" >
+                         <div class="carousel-caption" >
                            <h4>Slide {{$index}}</h4>
                           <!-- <p>{{slide.text}}</p>-->
                          </div>
@@ -43,7 +43,7 @@
                 <hr>
              <div class="row">
 
-                   <div class="col-sm-6 col-md-4"  ng-repeat="item in newsList">
+                   <div class="col-sm-6 col-md-4"  ng-repeat="item in newsList" >
                      <a href="articleDetail?id={{item.id}}&name={{name}}" class="thumbnail">
                        <img ng-src="{{item.content.titleImg}}" alt="通用的占位符缩略图">
                      </a>
@@ -53,7 +53,7 @@
      </div>
   </div>
 
-      <div class="model row">
+      <div class="model row" >
            <div class="col-md-4 pleft">
                <div class="whitebg paddding_20 boxShow mgb_20">
                  <h4 class="titleDiv"><i class="fa fa-globe"></i>前端技术</h4>

@@ -40,6 +40,15 @@
   margin-top:20px;
 }
 
+.myTitle{
+     line-height: 26px;
+     font-size: 16px;
+     font-weight: bold;
+     color:#337ab7;
+    margin-top:10px;
+}
+
+
 .margin_0{
   margin:0px;
 }
@@ -56,6 +65,12 @@
   padding-right:15px;
 }
 
+.relative{
+  position:absolute;
+}
+.absolute{
+  position:relative;
+}
 
 .boxShow{
   -webkit-box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
@@ -106,9 +121,64 @@
 .list2{
   img{
     width:100%;
+    height:100%;
+    transition: all 1.0s;
+    -webkit-transition: all 1.0s;
   }
+
+
+
   .col-md-4{
     padding:0px;
     margin:0px;
+    cursor: pointer;
+    a{
+      display:block;
+      color: #666666;
+    }
+    a:hover{
+      text-decoration: none;
+    }
+  }
+  .listContent:hover{
+    background:#f7f8fd;
+    img{
+      -moz-transform:  scale(1.2);
+      -webkit-transform: scale(1.2);
+      -o-transform: scale(1.2);
+    }
+  }
+  .borderLine{
+    -webkit-box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+  }
+  .titleImg{
+    width:100%;
+    height:145px;
+    overflow:hidden;
+  }
+  .title{
+     font-size:16px;
+     /*
+     color:#337ab7;
+     */
+     margin:10px 0px 0px 0px;
+  }
+  .breif{
+    margin:0px;
+  }
+  .bottom{
+    /*
+    color:#337ab7;
+    */
+    margin-top:10px;
+    height:15px;
+    b{
+      float:left;
+    }
+    span{
+      float:right;
+    }
   }
 }

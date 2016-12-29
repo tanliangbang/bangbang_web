@@ -1,15 +1,53 @@
-<div class="container mgt_20">
+<div class="container mgt_20" >
   <div class="headerDiv"></div>
 
     <div id="content" class="row-fluid">
-      <div class="row">
+      <div class="row" infinite-scroll='loadMore()' infinite-scroll-distance='0' infinite-scroll-disabled='loading'>
               <div class="col-md-8 padding_right_15">
-                  <div class="list2 padding_right_15  mgb_20"  ng-click="toDetail()">
-                      <div class="row boxShow" >
-                           <div class="col-md-4 paddding_20 whitebg" ng-repeat="item in newsList">
-                              <img ng-src="{{item.content.titleImg}}">
-                           </div>
+                  <div class="list2 padding_right_15  mgb_20"  >
+                      <div class="row" >
+                             <div class="col-md-4">
+                               <div>
+                                  <a ng-if="$index%3==0" href="articleDetail?name={{name}}&id={{item.id}}"  class="listContent whitebg paddding_20 borderLine listAnimation1" ng-repeat="item in newsList" >
+                                    <div class="titleImg">
+                                      <img ng-src="{{item.content.titleImg}}" >
+                                    </div>
+                                    <div class="myTitle">{{item.content.title}}</div>
+                                    <div class="breif">{{item.content.breif}}</div>
+                                    <div class="bottom">
+                                       <b>阅读量:{{item.readyNum}}</b>
+                                      <date value="{{item.createTime}}"></date>
+                                    </div>
+                                  </a>
+                               </div>
 
+                             </div>
+                            <div class="col-md-4 ">
+                                <a ng-if="$index%3==1" href="articleDetail?name={{name}}&id={{item.id}}" class="listContent whitebg paddding_20 borderLine listAnimation1" ng-repeat="item in newsList">
+                                  <div class="titleImg">
+                                    <img ng-src="{{item.content.titleImg}}" >
+                                  </div>
+                                  <div class="myTitle">{{item.content.title}}</div>
+                                  <div class="breif">{{item.content.breif}}</div>
+                                  <div class="bottom">
+                                    <b>阅读量:{{item.readyNum}}</b>
+                                    <date value="{{item.createTime}}"></date>
+                                  </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4" >
+                                <a ng-if="$index%3==2" href="articleDetail?name={{name}}&id={{item.id}}"  class="listContent whitebg paddding_20 borderLine listAnimation1" ng-repeat="item in newsList">
+                                  <div class="titleImg">
+                                    <img ng-src="{{item.content.titleImg}}" >
+                                  </div>
+                                  <div class="myTitle">{{item.content.title}}</div>
+                                  <div class="breif">{{item.content.breif}}</div>
+                                  <div class="bottom">
+                                    <b>阅读量:{{item.readyNum}}</b>
+                                    <date value="{{item.createTime}}"></date>
+                                  </div>
+                                </a>
+                            </div>
                        </div>
                   </div>
 

@@ -51,3 +51,83 @@
   from { top: 0px; }
   to { top: 100%; }
 }
+
+
+
+   .listAnimation1.ng-enter {
+     -webkit-animation: 1s list1_animation;
+     -moz-animation: 1s list1_animation;
+     -o-animation: 1s list1_animation;
+     animation: 1s list1_animation;
+
+   }
+
+     @keyframes list1_animation {
+        from {
+          -moz-transform: /*rotate(0deg)*/ scale(0);
+          -webkit-transform:/* rotate(0deg)*/ scale(0);
+          -o-transform: /*rotate(0deg)*/ scale(0);
+        }
+
+        to {
+          -moz-transform: /*rotate(360deg)*/ scale(1);
+          -webkit-transform:/* rotate(360deg)*/ scale(1);
+          -o-transform: /*rotate(360deg)*/ scale(1);
+        }
+     }
+
+     @-webkit-keyframes list1_animation {
+       from {
+         -moz-transform: /*rotate(0deg)*/ scale(0);
+         -webkit-transform: /*rotate(0deg)*/ scale(0);
+         -o-transform: /*rotate(0deg)*/ scale(0);
+       }
+
+       to {
+         -moz-transform: /*rotate(360deg)*/ scale(1);
+         -webkit-transform: /*rotate(360deg)*/ scale(1);
+         -o-transform: /*rotate(360deg)*/ scale(1);
+       }
+     }
+
+
+
+
+.listAnimation2.ng-enter {
+  -webkit-animation: 0.8s list2_animation;
+  -moz-animation: 0.8s list2_animation;
+  -o-animation: 0.8s list2_animation;
+  animation: 0.8s list2_animation;
+
+}
+
+@keyframes list2_animation {
+  from {
+    -moz-transform: rotate(0deg) scale(0);
+    -webkit-transform: rotate(0deg) scale(0);
+    -o-transform: rotate(0deg) scale(0);
+  }
+
+  to {
+    -moz-transform: rotate(360deg) scale(1);
+    -webkit-transform: rotate(360deg) scale(1);
+    -o-transform: rotate(360deg) scale(1);
+  }
+}
+
+@-webkit-keyframes list2_animation {
+  from {
+    -moz-transform: rotate(0deg) scale(0);
+    -webkit-transform: rotate(0deg) scale(0);
+    -o-transform: rotate(0deg) scale(0);
+  }
+
+  to {
+    -moz-transform: rotate(360deg) scale(1);
+    -webkit-transform: rotate(360deg) scale(1);
+    -o-transform: rotate(360deg) scale(1);
+  }
+}
+
+
+
