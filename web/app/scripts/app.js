@@ -50,4 +50,9 @@ angular
         redirectTo: '/'
       });
     $locationProvider.html5Mode({enabled: true, requireBase: false})
+  })
+  .run(function($rootScope) {
+    $rootScope.$on('$routeChangeStart', function(evt, next, current) {
+       $(window).scrollTop(0);
+    });
   });

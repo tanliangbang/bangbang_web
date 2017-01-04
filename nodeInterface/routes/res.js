@@ -87,8 +87,8 @@ router.get('/getRes', function(req, res, next) {
 
 router.post('/addResContent', function(req, res, next) {
     var tableName = 'res_content_'+req.body.name;
-    var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime) values ("+
-        db.escape(req.body.content)+",from_unixtime("+req.body.startTime+"),from_unixtime("+ req.body.endTime+"),"+ req.body.onLine+",now(),now())";
+    var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime,readyNum) values ("+
+        db.escape(req.body.content)+",from_unixtime("+req.body.startTime+"),from_unixtime("+ req.body.endTime+"),"+ req.body.onLine+",now(),now(),0)";
     db.query(sql, function(err, rows, fields){
         if (err) {
            return;
@@ -124,7 +124,7 @@ router.get('/getResContentList', function(req, res, next) {
     if(arg.size){
         end = arg.size;
     }
-    var sql = "select * from res_content_"+arg.name + " limit "+start+","+end;
+    var sql = "select * from res_content_"+arg.name + " order by createTime desc limit "+start+","+end;
     var totalSql = "select count(id) as total from res_content_"+arg.name
     db.query(sql, function(err, rows, fields){
         if (err) {
