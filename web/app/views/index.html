@@ -1,96 +1,121 @@
-<div id="content" class="row-fluid news">
+<!--<div id="content" class="row-fluid news">-->
 
+  <!--<div class="container">-->
+    <!--<div class="headerDiv"></div>-->
+        <!--<div class="model row model1 mgt_20">-->
+             <!--<div class="col-md-8 height_full ">-->
+
+                 <!--<div class="scrollImgClass whitebg paddding_20 boxShow mgb_20" >-->
+                   <!--<div >-->
+                     <!--<carousel  no-wrap="noWrapSlides" >-->
+                       <!--<slide  ng-repeat="item in newsList" active="slide.active">-->
+                         <!--<img ng-src="{{item.content.titleImg}}" >-->
+                         <!--<div class="carousel-caption" >-->
+                           <!--<h4>Slide {{$index}}</h4>-->
+                          <!--&lt;!&ndash; <p>{{slide.text}}</p>&ndash;&gt;-->
+                         <!--</div>-->
+                       <!--</slide>-->
+                     <!--</carousel>-->
+                   <!--</div>-->
+                 <!--</div>-->
+
+
+          <!--</div>-->
+          <!--<div class="col-md-4 height_full">-->
+               <!--<div class="whitebg paddding_20 boxShow mgb_20">-->
+                 <!--<h4 class="titleDiv"><i class="fa fa-globe"></i>前端技术</h4>-->
+
+                 <!--<div class="widget widget-info whitebg rightMargin titleLineColor">-->
+                      <!--<div class="widget-body">-->
+                        <!--<a class="alink" href="articleDetail?id={{item.id}}&name={{name}}" ng-repeat="item in newsList">{{item.content.title | cut:false:19:'...'}}</a>-->
+                      <!--</div>-->
+                    <!--</div>-->
+               <!--</div>-->
+          <!--</div>-->
+
+  <!--</div>-->
+
+   <!--<div class="row paddinglr_15">-->
+       <!--<div class="model imgRow  boxShow whitebg padding_10_20 mgt_20 mgb_20">-->
+                <!--<div class="tColor">-->
+                  <!--<h4>娱乐图片</h4>-->
+                <!--</div>-->
+                <!--<hr>-->
+             <!--<div class="row">-->
+
+                   <!--<div class="col-sm-6 col-md-4"  ng-repeat="item in newsList" >-->
+                     <!--<a href="articleDetail?id={{item.id}}&name={{name}}" class="thumbnail">-->
+                       <!--<img ng-src="{{item.content.titleImg}}" alt="通用的占位符缩略图">-->
+                     <!--</a>-->
+                   <!--</div>-->
+
+           <!--</div>-->
+     <!--</div>-->
+  <!--</div>-->
+
+      <!--<div class="model row" >-->
+           <!--<div class="col-md-4 pleft">-->
+               <!--<div class="whitebg paddding_20 boxShow mgb_20">-->
+                 <!--<h4 class="titleDiv"><i class="fa fa-globe"></i>前端技术</h4>-->
+
+                 <!--<div class="widget widget-info whitebg rightMargin titleLineColor">-->
+                   <!--<div class="widget-body">-->
+                     <!--<a class="alink" href="articleDetail?id={{item.id}}&name={{name}}" ng-repeat="item in newsList">{{item.content.title | cut:false:20:'...'}}</a>-->
+                   <!--</div>-->
+                 <!--</div>-->
+               <!--</div>-->
+           <!--</div>-->
+          <!--<div class="col-md-4 pleft">-->
+              <!--<div class="whitebg paddding_20 boxShow mgb_20">-->
+                <!--<h4 class="titleDiv"><i class="fa fa-globe"></i>前端技术</h4>-->
+
+                <!--<div class="widget widget-info whitebg rightMargin titleLineColor">-->
+                  <!--<div class="widget-body">-->
+                    <!--<a class="alink" href="articleDetail?id={{item.id}}&name={{name}}" ng-repeat="item in newsList">{{item.content.title | cut:false:20:'...'}}</a>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-md-4 pleft">-->
+            <!--<div class="whitebg paddding_20 boxShow mgb_20">-->
+              <!--<h4 class="titleDiv"><i class="fa fa-globe"></i>前端技术</h4>-->
+
+              <!--<div class="widget widget-info whitebg rightMargin titleLineColor">-->
+                <!--<div class="widget-body">-->
+                  <!--<a class="alink" href="articleDetail?id={{item.id}}&name={{name}}" ng-repeat="item in newsList">{{item.content.title | cut:false:20:'...'}}</a>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
+      <!--</div>-->
+
+  <!--</div>-->
+
+
+<!--</div>-->
+
+
+
+<div class="row-fluid news">
   <div class="container">
-    <div class="headerDiv"></div>
-        <div class="model row model1 mgt_20">
-             <div class="col-md-8 height_full ">
+       <div class="row">
+         <div class="col-md-4" >
+             <div class="myanimation" style="background:green;height:80px;margin-top:30px;">
 
-                 <div class="scrollImgClass whitebg paddding_20 boxShow mgb_20" >
-                   <div >
-                     <carousel  no-wrap="noWrapSlides" >
-                       <slide  ng-repeat="item in newsList" active="slide.active">
-                         <img ng-src="{{item.content.titleImg}}" >
-                         <div class="carousel-caption" >
-                           <h4>Slide {{$index}}</h4>
-                          <!-- <p>{{slide.text}}</p>-->
-                         </div>
-                       </slide>
-                     </carousel>
-                   </div>
-                 </div>
-
-
-          </div>
-          <div class="col-md-4 height_full">
-               <div class="whitebg paddding_20 boxShow mgb_20">
-                 <h4 class="titleDiv"><i class="fa fa-globe"></i>前端技术</h4>
-
-                 <div class="widget widget-info whitebg rightMargin titleLineColor">
-                      <div class="widget-body">
-                        <a class="alink" href="articleDetail?id={{item.id}}&name={{name}}" ng-repeat="item in newsList">{{item.content.title | cut:false:19:'...'}}</a>
-                      </div>
-                    </div>
-               </div>
-          </div>
-
-  </div>
-
-   <div class="row paddinglr_15">
-       <div class="model imgRow  boxShow whitebg padding_10_20 mgt_20 mgb_20">
-                <div class="tColor">
-                  <h4>娱乐图片</h4>
-                </div>
-                <hr>
-             <div class="row">
-
-                   <div class="col-sm-6 col-md-4"  ng-repeat="item in newsList" >
-                     <a href="articleDetail?id={{item.id}}&name={{name}}" class="thumbnail">
-                       <img ng-src="{{item.content.titleImg}}" alt="通用的占位符缩略图">
-                     </a>
-                   </div>
+             </div>
+         </div>
+         <div class="col-md-4" >
+           <div style="background:green;height:80px;margin-top:30px;">
 
            </div>
-     </div>
-  </div>
+         </div>
+         <div class="col-md-4" >
+           <div style="background:green;height:80px;margin-top:30px;">
 
-      <div class="model row" >
-           <div class="col-md-4 pleft">
-               <div class="whitebg paddding_20 boxShow mgb_20">
-                 <h4 class="titleDiv"><i class="fa fa-globe"></i>前端技术</h4>
-
-                 <div class="widget widget-info whitebg rightMargin titleLineColor">
-                   <div class="widget-body">
-                     <a class="alink" href="articleDetail?id={{item.id}}&name={{name}}" ng-repeat="item in newsList">{{item.content.title | cut:false:20:'...'}}</a>
-                   </div>
-                 </div>
-               </div>
            </div>
-          <div class="col-md-4 pleft">
-              <div class="whitebg paddding_20 boxShow mgb_20">
-                <h4 class="titleDiv"><i class="fa fa-globe"></i>前端技术</h4>
+         </div>
+       </div>
 
-                <div class="widget widget-info whitebg rightMargin titleLineColor">
-                  <div class="widget-body">
-                    <a class="alink" href="articleDetail?id={{item.id}}&name={{name}}" ng-repeat="item in newsList">{{item.content.title | cut:false:20:'...'}}</a>
-                  </div>
-                </div>
-              </div>
-          </div>
-          <div class="col-md-4 pleft">
-            <div class="whitebg paddding_20 boxShow mgb_20">
-              <h4 class="titleDiv"><i class="fa fa-globe"></i>前端技术</h4>
-
-              <div class="widget widget-info whitebg rightMargin titleLineColor">
-                <div class="widget-body">
-                  <a class="alink" href="articleDetail?id={{item.id}}&name={{name}}" ng-repeat="item in newsList">{{item.content.title | cut:false:20:'...'}}</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-      </div>
-
-  </div>
-
-
+    </div>
 </div>

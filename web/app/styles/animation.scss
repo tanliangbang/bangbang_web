@@ -129,5 +129,26 @@
   }
 }
 
+.myanimation{
+  -webkit-animation: 0.8s list_animation;
+  -moz-animation: 0.8s list_animation;
+  -o-animation: 0.8s list_animation;
+  animation: 0.8s list_animation;
+}
+
+
+@keyframes list_animation {
+  from {
+    -moz-transform: perspective(600px) rotateY(0deg);
+    -webkit-transform:perspective(600px) rotateY(0deg);
+    -o-transform:perspective(600px) rotateY(0deg);
+  }
+
+  to {
+    -moz-transform:perspective(0px) rotateY(90deg);
+    -webkit-transform:perspective(0px) rotateY(90deg);
+    -o-transform: perspective(0px) rotateY(90deg);
+  }
+}
 
 
