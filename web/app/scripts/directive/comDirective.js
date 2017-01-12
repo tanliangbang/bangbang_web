@@ -43,3 +43,94 @@ app.directive("date", function() {
     template:'<span>{{value}}</span>'
   }
 });
+
+
+
+app.directive("modelItem",['$timeout', '$parse', function($timeout,$parse) {
+  return {
+    restrict:'AEC',
+    scope:{
+      value:"@"
+    },
+    link:function(scope,el,attrs){
+      var num = attrs.delay%10;
+      var colorArray = ['F29500','6FA014','3E3F3A','C23916','3C7780','94C849','BE213E','00ACED','3B5B99','91009B'];
+      scope.bgColor = '#'+colorArray[num];
+      scope.content = attrs.content
+      $timeout(function () {
+        var delay = attrs.delay*0.1;
+        el[0].firstChild.style.webkitTransform = "rotateY(0deg)";
+        el[0].firstChild.style.oTransform = "rotateY(0deg)";
+        el[0].firstChild.style.transform = "rotateY(0deg)";
+        el[0].firstChild.style.msTransform = "rotateY(0deg)";
+        el[0].firstChild.style.mozTransform = "rotateY(0deg)";
+        el[0].firstChild.style.transition = "-webkit-transform 0.2s linear "+delay+"s";
+        el[0].firstChild.style.transition = "-o-transform 0.2s linear "+delay+"s";
+        el[0].firstChild.style.transition = "-ms-transform 0.2s linear "+delay+"s";
+        el[0].firstChild.style.transition = "-moz-transform 0.2s linear "+delay+"s";
+        el[0].firstChild.style.transition = "transform 0.2s linear "+delay+"s";
+      });
+
+    },
+    template:'<div class="indexAnimation" style="background:{{bgColor}}">{{content}}</div>'
+  }
+}]);
+
+
+app.directive("listAnimate1", function($timeout) {
+  return {
+    restrict:'AEC',
+    scope:{
+      value:"@"
+    },
+    link:function(scope,el,attrs){
+      var size = parseInt(attrs.size)
+      var index = parseInt(attrs.index);
+      var delay = index%size*0.2;
+      $timeout(function () {
+        el[0].parentNode.style.webkitTransform = "scale(1)";
+        el[0].parentNode.style.oTransform = "scale(1)";
+        el[0].parentNode.style.transform = "scale(1)";
+        el[0].parentNode.style.msTransform = "scale(1)";
+        el[0].parentNode.style.mozTransform = "scale(1)";
+        el[0].parentNode.style.transition = "-webkit-transform 0.5s linear "+delay+"s";
+        el[0].parentNode.style.transition = "-o-transform 0.5s linear "+delay+"s";
+        el[0].parentNode.style.transition = "-ms-transform 0.5s linear "+delay+"s";
+        el[0].parentNode.style.transition = "-moz-transform 0.5s linear "+delay+"s";
+        el[0].parentNode.style.transition = "transform 0.5s linear "+delay+"s";
+      });
+    },
+    template:""
+  }
+});
+
+
+
+app.directive("listAnimate2", function($timeout) {
+  return {
+    restrict:'AEC',
+    scope:{
+      value:"@"
+    },
+    link:function(scope,el,attrs){
+      var size = parseInt(attrs.size)
+      var index = parseInt(attrs.index);
+      var delay = index%size*0.1;
+      $timeout(function () {
+        el[0].parentNode.style.transition = "-webkit-transform 0.2s linear "+delay+"s";
+        el[0].parentNode.style.transition = "-o-transform 0.2s linear "+delay+"s";
+        el[0].parentNode.style.transition = "-ms-transform 0.2s linear "+delay+"s";
+        el[0].parentNode.style.transition = "-moz-transform 0.2s linear "+delay+"s";
+        el[0].parentNode.style.transition = "transform 0.2s linear "+delay+"s";
+        el[0].parentNode.style.webkitTransform = "rotate(0deg) scale(1)";
+        el[0].parentNode.style.oTransform = "rotate(0deg) scale(1)";
+        el[0].parentNode.style.transform = "rotate(0deg) scale(1)";
+        el[0].parentNode.style.msTransform = "rotate(0deg) scale(1)";
+        el[0].parentNode.style.mozTransform = "rotate(0deg) scale(1)";
+      });
+    },
+    template:""
+  }
+});
+
+

@@ -15,7 +15,7 @@ angular.module('webApp')
       'Karma'
     ];
 
-
+    $rootScope.header = false;
     $scope.myInterval = 2000;
     $scope.noWrapSlides = false;
     var slides = $scope.slides = [];
@@ -28,6 +28,6 @@ angular.module('webApp')
 
     }).error(function(data,status,headers,congfig){
       defer.reject(data);
-    });;
+    });
 
   }]);

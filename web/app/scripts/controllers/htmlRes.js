@@ -14,9 +14,9 @@ angular.module('webApp')
       'AngularJS',
       'Karma'
     ];
-
+    $rootScope.header = true;
     var start = 0;
-    var size = 12;
+    var size = $scope.size = 12;
     $rootScope.isActive = 1;
     $scope.name = 'jsRes';
     $scope.newsList = [];
@@ -29,17 +29,15 @@ angular.module('webApp')
     }
 
     $scope.loadMore = function(){
-        getList(start,size);
+      getList(start,size);
         start = start+size;
     }
 
     function getList(start,size){
-      $scope.loading = true;
+
       $http.get("/api/res/getResContentList",{params: {name:"jsRes",start:start,size:size}}).success(function(data,status,headers,congfig){
         $.merge($scope.newsList,data.content);
-        $scope.loading = false;
       }).error(function(data,status,headers,congfig){
-        $scope.loading = false;
         defer.reject(data);
       });
     }

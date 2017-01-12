@@ -1,10 +1,11 @@
-<div class="container mgt_20">
+<div class="container mgt_20"  >
   <div class="headerDiv"></div>
 
     <div id="content" class="row-fluid">
-      <div class="row" infinite-scroll='loadMore()' infinite-scroll-distance='0' infinite-scroll-disabled='loading'>
+      <div class="row" infinite-scroll='loadMore()'>
               <div class="col-md-8">
-                  <div class="list1 padding_10_20 boxShow mgb_20 whitebg listAnimation1" ng-repeat="item in newsList" ng-click="toDetail()">
+                  <div class="list1 listAnimate1Class  padding_10_20 boxShow mgb_20 whitebg" ng-repeat="item in newsList" ng-click="toDetail()">
+                      <div class="listAnimate1" size="{{size}}" index="{{$index}}"></div>
                       <div class="row">
                               <div class="col-md-5 list1_left">
                                     <img  src ="{{item.content.titleImg}}">
@@ -27,13 +28,16 @@
 
           <div  class="col-md-4">
 
-            <div class="whitebg paddding_20 boxShow mgb_20">
-                 <div class="advertiseImg">
+            <div class="listAnimate1Class whitebg paddding_20 boxShow mgb_20">
+              <div class="listAnimate1" size="10" index="1"></div>
+
+              <div class="advertiseImg">
                    <img src="../images/1.jpg">
                  </div>
             </div>
 
-            <div class="whitebg paddding_20 boxShow mgb_20">
+            <div class="listAnimate1Class whitebg paddding_20 boxShow mgb_20">
+              <div class="listAnimate1" size="10" index="2"></div>
                   <div class="widget widget-info whitebg rightMargin titleLineColor">
                     <div class="widget-header tColor">
                       <h4><i class="fa fa-globe"></i>前端技术</h4>
@@ -49,15 +53,16 @@
                   </div>
             </div>
 
-            <div class="whitebg paddding_20 boxShow mgb_20">
-
+            <div class="listAnimate1Class whitebg paddding_20 boxShow mgb_20">
+              <div class="listAnimate1" size="10" index="3"></div>
                   <div class="advertiseImg">
                       <img src="../images/2.jpg">
                     </div>
 
             </div>
 
-            <div class="whitebg paddding_20 boxShow mgb_20">
+            <div class="listAnimate1Class whitebg paddding_20 boxShow mgb_20">
+              <div class="listAnimate1" size="10" index="4"></div>
                   <div class="widget widget-info whitebg rightMargin titleLineColor">
                       <div class="widget-header tColor">
                         <h4><i class="fa fa-globe"></i>前端技术</h4>
@@ -75,8 +80,8 @@
             </div>
 
 
-            <div class="whitebg paddding_20 boxShow mgb_20">
-
+            <div class="listAnimate1Class whitebg paddding_20 boxShow mgb_20">
+              <div class="listAnimate1" size="10" index="5"></div>
                   <div class="advertiseImg">
                     <img src="../images/3.jpg">
                   </div>
@@ -84,7 +89,8 @@
 
             </div>
 
-            <div class="whitebg paddding_20 boxShow mgb_20">
+            <div class="listAnimate1Class whitebg paddding_20 boxShow mgb_20">
+              <div class="listAnimate1" size="10" index="6"></div>
                   <div class="widget widget-info whitebg rightMargin titleLineColor ">
                     <div class="widget-header tColor">
                       <h4><i class="fa fa-globe"></i>前端技术</h4>
