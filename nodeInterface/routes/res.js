@@ -67,7 +67,7 @@ router.get('/getResList', function(req, res, next) {
         if (err) {
             return;
         }
-        utilFn.successSend(res,JSON.stringify(rows));
+        utilFn.successSend(res,rows);
     });
 });
 
@@ -79,7 +79,7 @@ router.get('/getRes', function(req, res, next) {
         if (err) {
             return;
         }
-        utilFn.successSend(res,JSON.stringify(rows));
+        utilFn.successSend(res,rows);
     });
 });
 
@@ -139,7 +139,7 @@ router.get('/getResContentList', function(req, res, next) {
                 return;
             }
             var data={content:content,pageTotal:rows[0].total}
-            utilFn.successSend(res,JSON.stringify(data));
+            utilFn.successSend(res,data);
         });
 
     });
@@ -172,7 +172,7 @@ router.get('/getResContentById', function(req, res, next) {
                 return;
             }
         });
-        utilFn.successSend(res,JSON.stringify(rows));
+        utilFn.successSend(res,rows);
     });
 });
 

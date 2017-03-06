@@ -1,4 +1,6 @@
 var express = require('express');
+var session = require('express-session');
+
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -35,6 +37,16 @@ app.use('/api/res', res);
 
 
 
+app.use(session({
+     secret: '12345',
+     name: 'testapp',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+     cookie: {maxAge: 80000 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+     resave: false,
+    saveUninitialized: true,
+}));
+
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -45,6 +57,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
+  res.locals.user = req.session.user;   // 从session 获取 user对象
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
