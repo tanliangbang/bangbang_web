@@ -54,7 +54,7 @@ app.directive("modelItem",['$timeout', '$parse', function($timeout,$parse) {
     },
     link:function(scope,el,attrs){
       var num = attrs.delay%10;
-      var colorArray = ['F29500','6FA014','3E3F3A','C23916','3C7780','94C849','BE213E','00ACED','3B5B99','91009B'];
+      var colorArray = ['3B5B99','6FA014','3E3F3A','C23916','3C7780','94C849','BE213E','00ACED','F29500','91009B'];
       scope.bgColor = '#'+colorArray[num];
       scope.content = attrs.content
       $timeout(function () {

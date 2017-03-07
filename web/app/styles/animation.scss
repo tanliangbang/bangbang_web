@@ -20,10 +20,6 @@
 
 .view-frame.ng-leave {
   -webkit-animation: 0.5s fade-out;
-  -moz-animation: 0.5s fade-out;
-  -o-animation: 0.5s fade-out;
-  animation: 0.5s fade-out;
-  z-index:99;
 }
 
 @keyframes fade-in {
@@ -87,7 +83,7 @@
 
 .modelItem:hover{
    >div{
-     border:4px solid rgba(0,0,0,0.2)
+     border:4px solid rgba(0,0,0,0.2);
    }
 }
 
