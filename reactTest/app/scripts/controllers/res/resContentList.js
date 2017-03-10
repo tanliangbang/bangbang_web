@@ -46,6 +46,7 @@ angular.module('reactTestApp')
       }
       getTypeBuyId(function() {
             $http.get("/api/res/getResContentList",{params: {name:$scope.type,start:start,size:_this.itemsPerPage}}).success(function (data, status, headers, congfig) {
+              data = data.data;
               $scope.currTypeContents = data.content;
               _this.totalItems = data.pageTotal;
             }).error(function (data, status, headers, congfig) {
@@ -64,6 +65,7 @@ angular.module('reactTestApp')
 
     function getTypeBuyId(callback){
       $http.get("/api/res/getRes?id="+$scope.id).success(function(data){
+        data = data.data;
         $scope.currItem = data[0];
         $scope.typeItems = JSON.parse($scope.currItem.type_specification);
         callback();

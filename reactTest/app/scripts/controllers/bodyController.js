@@ -19,7 +19,8 @@ angular.module('reactTestApp')
     ];
 
     $http.get("/api/res/getResList").success(function(data,status,headers,congfig){
-         $scope.resList = data;
+      console.log(data)
+         $scope.resList = data.data;
     }).error(function(data,status,headers,congfig){
       defer.reject(data);
     });

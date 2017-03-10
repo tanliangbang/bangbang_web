@@ -39,6 +39,7 @@ angular.module('reactTestApp')
     var id = $routeParams.id;
     var resContentId =  $scope.resContentId = $routeParams.resContentId;
     $http.get("/api/res/getRes?id="+id).success(function(data,status,headers,congfig){
+        data = data.data;
         $scope.currResType = currResType = data[0];
         fields = JSON.parse(currResType.type_specification);
         UE.myObj = [];
@@ -49,6 +50,7 @@ angular.module('reactTestApp')
       }
         if(resContentId){
             $http.get("/api/res/getResContentById?id="+resContentId+"&name="+$routeParams.type).success(function(data,status,headers,congfig){
+               data = data.data;
                 var currdata =  $scope.otherField = data[0];
                 currdata.startTime = changeTime(currdata.startTime,"-");
                 currdata.endTime = changeTime(currdata.endTime,"-");

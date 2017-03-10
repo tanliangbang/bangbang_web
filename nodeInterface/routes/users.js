@@ -39,15 +39,25 @@ router.post('/register', function(req, res, next) {
 
 
 function innerUser(req, res, next){
-    console.log("aaaaaaaaaaaaaa")
     var sql = "insert into bang_users (username,password,email) values "+
         "('"+req.body.username+"','"+req.body.password+"','"+ req.body.email+"')";
+    var getSql = "select * from bang_users where username= '"+req.body.username+"' and password = '"+req.body.password +"'";
+
     db.query(sql, function(err, rows, fields){
         if (err) {
             console.log(err);
             return;
         }
-        utilFn.successSend(res,null,200,'注册成功');
+        db.query(getSql, function(err, rows, fields){
+            if (err) {
+                console.log(err);
+                return;
+            }
+           {
+                req.session.user = rows[0];
+                utilFn.successSend(res,rows[0],200,'注册成功');
+            }
+        });
 
     });
 }
