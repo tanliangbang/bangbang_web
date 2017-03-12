@@ -11,4 +11,11 @@ utilFn.successSend = function(res,data,statusCode,errorMsg){
     var data ={data:data,statusCode:statusCode,errorMsg:errorMsg}
     res.end(JSON.stringify(data));
 }
+utilFn.checkEmpty = function(str){
+    if(str||str ==""){
+       return str;
+    }
+    return "";
+}
+
 module.exports = utilFn;

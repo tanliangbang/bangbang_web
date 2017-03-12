@@ -39,7 +39,6 @@ router.post('/register', function(req, res, next) {
 
 
 function innerUser(req, res, next){
-    console.log("aaaaaaaaaaaaaa")
     var sql = "insert into bang_users (username,password,email) values "+
         "('"+req.body.username+"','"+req.body.password+"','"+ req.body.email+"')";
     db.query(sql, function(err, rows, fields){
