@@ -8,9 +8,9 @@ var db = require('../util/db.js');
 var utilFn = require('../util/utilFn.js');
 
 var url = require('url');
+var async = require('async');
 
 router.post('/comment', function(req, res, next) {
-
     var topic_id = utilFn.checkEmpty(req.body.topic_id)
     var content = utilFn.checkEmpty(req.body.content)
     var from_uid = req.session.user.id;
@@ -35,42 +35,48 @@ router.get('/commentList', function(req, res, next) {
     var arg = url.parse(req.url, true).query
     var start = 0;
     var end = 10;
+    var topic_id = arg.topic_id;
     if(arg.start){
         start = arg.start;
     }
     if(arg.size){
         end = arg.size;
     }
-    var sql = "select * from comments";
-    var totalSql = "select count(id) as total from comments"
-    db.query(sql, function(err, rows, fields){
-        if (err) {
-            return;
-        }
-
-        var list = rows;
+    if(!topic_id){
+        utilFn.successSend(res,null,500,'获取失败');
+    }
+    var sql = "select * from comments where topic_id = " +topic_id +" order by cTime desc";
+    var totalSql = "select count(id) as total from comments where topic_id = " +topic_id;
+    var tasks = [function(callback) {
         db.query(totalSql, function(err, rows, fields){
-            if (err) {
-                return;
-            }
-            for(var i=0;i<list.length;i++){
-
-                var userSql =  "select userName,nick from bang_users where id ="+list[i].from_uid;
-                db.query(userSql, function(err, rows, fields){
-                    if (err) {
-                        return;
-                    }
-                    list.user = rows[0];
-                    if(i==list.length){
-                        var data={list:list,pageTotal:rows[0].total}
-                        utilFn.successSend(res,data);
-                    }
-                });
-
-            }
-
+            callback(err,rows[0].total);
         });
+    }, function(total,callback) {
+        db.query(sql, function(err, rows, fields){
+            callback(err, rows,total);
+        });
+    }, function(rows,total,callback) {
+        var userSql = "";
+        async.map(rows, function(item, callback) {
+            userSql =  "select userName,nick from bang_users where id ="+item.from_uid;
+            db.query(userSql, function(err, rows) {
+                item.user = rows[0];
+                callback(err, res);
+            });
+        }, function(err, results) {
+            if(err) {
+                console.log(err);
+            } else {
+                var data={list:rows,pageTotal:total}
+                utilFn.successSend(res,data);
+            }
+        });
+    }];
 
+    async.waterfall(tasks, function(err, results) {
+        if(err) {
+            console.log(err);
+        }
     });
 });
 
