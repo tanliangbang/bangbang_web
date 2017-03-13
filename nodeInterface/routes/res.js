@@ -115,7 +115,6 @@ router.post('/UpdateResContent', function(req, res, next) {
 
 
 router.get('/getResContentList', function(req, res, next) {
-    console.log(req.session)
     var arg = url.parse(req.url, true).query
     var start = 0;
     var end = 10;

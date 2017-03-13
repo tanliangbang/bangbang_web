@@ -12,6 +12,7 @@ var users = require('./routes/users');
 var upload = require('./routes/upload');
 var article = require('./routes/article');
 var res = require('./routes/res');
+var comments = require('./routes/comments');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use('/api', index);
 app.use('/api/users', users);
 app.use('/api/upload', upload);
 app.use('/api/article', article);
+app.use('/api/comments', comments);
 
 app.use('/api/res', res);
 
