@@ -18,4 +18,11 @@ utilFn.checkEmpty = function(str){
     return "";
 }
 
+utilFn.checkNumber = function(num){
+    if(!num){
+        return num;
+    }
+    return num;
+}
+
 module.exports = utilFn;
