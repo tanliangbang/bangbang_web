@@ -20,7 +20,7 @@ utilFn.checkEmpty = function(str){
 
 utilFn.checkNumber = function(num){
     if(!num){
-        return num;
+        return 0;
     }
     return num;
 }

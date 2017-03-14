@@ -16,6 +16,7 @@ router.post('/comment', function(req, res, next) {
     var reply_id = utilFn.checkNumber(req.body.reply_id)
     var from_uid = req.session.user.id;
     var to_uid = utilFn.checkNumber(req.body.to_uid);
+    console.log(to_uid)
     var sql = "insert into comments (topic_id,content,from_uid,to_uid,reply_id) values "+
         "('"+topic_id+"','"+content+"','"+ from_uid+"','"+to_uid+"','"+reply_id+"')";
     db.query(sql, function(err, rows, fields){
