@@ -170,27 +170,6 @@ function queryUserComment(reply_id,topic_id,callBack){
             callBack(data)
         });
 
-
-    /*var sqls = [
-        {sql:"select * from comments where  reply_id = "+reply_id+ " and topic_id = " +topic_id +" order by cTime desc",type:"list"},
-        {sql:"select count(id) as total from comments where reply_id = "+reply_id+ " and  topic_id = " +topic_id,type:"total"}
-    ];
-    async.map(sqls, function(item, callback) {
-        db.query(item.sql, function(err, rows, fields){
-            if (err) {
-                console.log(err);
-            }else{
-                if(item.type=="list"){
-                    data.list = rows;
-                }else if(item.type=="total"){
-                    data.pageTotal = rows[0].total;
-                }
-                callback(null);
-            }
-        });
-    }, function(err) {
-        callBack(data)
-    });*/
 }
 
 
