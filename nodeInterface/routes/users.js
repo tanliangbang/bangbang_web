@@ -26,11 +26,11 @@ router.post('/register', function(req, res, next) {
     var sql = "select id from bang_users where username= '"+req.body.username +"'";
     db.query(sql, function(err, rows, fields){
         if (err) {
-            console.log(err);
+            utilFn.successSend(res,null,500,'请求失败');
             return;
         }
         if(rows.length>0){
-            utilFn.successSend(res,null,500,'该用户已存在');
+            utilFn.successSend(res,null,511,'该用户已存在');
         }else{
             innerUser(req, res, next);
         }

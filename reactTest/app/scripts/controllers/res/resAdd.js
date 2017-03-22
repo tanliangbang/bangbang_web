@@ -37,7 +37,7 @@ angular.module('reactTestApp')
       $http.get("/api/res/getRes", {
         params: {id: $scope.id}
       }).success(function (data) {
-        currResType = data[0];
+        currResType = data.data[0];
         $scope.fields = analysisField(currResType.type_specification);
         $scope.res_desc = currResType.cname;
         $scope.res_name = currResType.name;

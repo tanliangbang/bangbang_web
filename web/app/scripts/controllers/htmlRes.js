@@ -36,9 +36,9 @@ angular.module('webApp')
     function getList(start,size){
 
       $http.get("/api/res/getResContentList",{params: {name:"jsRes",start:start,size:size}}).success(function(data,status,headers,congfig){
-        $.merge($scope.newsList,data.content);
+        $.merge($scope.newsList,data.data.content);
       }).error(function(data,status,headers,congfig){
-        defer.reject(data);
+        defer.reject(data.data);
       });
     }
 
