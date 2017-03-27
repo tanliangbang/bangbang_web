@@ -178,5 +178,37 @@ router.get('/getResContentById', function(req, res, next) {
 
 
 
+router.get('/recommend', function(req, res, next) {
+    var arg = url.parse(req.url, true).query
+    var sql = "select * from res_content_"+arg.name +" where isRecommend=1 limit 0,"+arg.size;
+    db.query(sql, function(err, rows, fields){
+        if (err) {
+            return;
+        }
+        for(var i=0;i<rows.length;i++){
+            rows[i].content  = JSON.parse(rows[i].content);
+        }
+        utilFn.successSend(res,rows);
+    });
+});
+
+
+router.get('/readyRank', function(req, res, next) {
+    var arg = url.parse(req.url, true).query
+    var sql = "select * from res_content_"+arg.name +" order by readyNum desc limit 0,"+arg.size;
+    db.query(sql, function(err, rows, fields){
+        if (err) {
+            return;
+        }
+        for(var i=0;i<rows.length;i++){
+            rows[i].content  = JSON.parse(rows[i].content);
+        }
+        utilFn.successSend(res,rows);
+    });
+});
+
+
+
+
 
 module.exports = router;
