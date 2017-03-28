@@ -16,9 +16,9 @@ router.post('/comment', function(req, res, next) {
     var reply_id = utilFn.checkNumber(req.body.reply_id)
     var from_uid = req.session.user.id;
     var to_uid = utilFn.checkNumber(req.body.to_uid);
-    console.log(to_uid)
-    var sql = "insert into comments (topic_id,content,from_uid,to_uid,reply_id) values "+
-        "('"+topic_id+"','"+content+"','"+ from_uid+"','"+to_uid+"','"+reply_id+"')";
+    var type = utilFn.checkNumber(req.body.type)
+    var sql = "insert into comments (topic_id,content,from_uid,to_uid,reply_id,type) values "+
+        "('"+topic_id+"','"+content+"','"+ from_uid+"','"+to_uid+"','"+reply_id+"','"+type+"')";
     db.query(sql, function(err, rows, fields){
         if (err) {
             console.log(err);
@@ -32,26 +32,19 @@ router.post('/comment', function(req, res, next) {
 
 router.get('/commentList', function(req, res, next) {
     var arg = url.parse(req.url, true).query
-    var start = 0;
-    var end = 10;
+    var start = arg.start?arg.start:0;
+    var end = arg.size?arg.size:10;
     var topic_id = arg.topic_id;
-    if(arg.start){
-        start = arg.start;
-    }
-    if(arg.size){
-        end = arg.size;
-    }
+    var type = arg.type;
     if(!topic_id){
         utilFn.successSend(res,null,500,'获取失败');
     }
 
-
-
     var data = {};
-    queryUserComment(0,topic_id,function(data){
+    queryUserComment(0,topic_id,type,function(data){
            async.parallel([
                 function(callback){
-                    queryAllReply(data.list,topic_id,function(err){
+                    queryAllReply(data.list,topic_id,type,function(err){
                         data = data;
                         callback(err);
                         // utilFn.successSend(res,data);
@@ -71,9 +64,9 @@ router.get('/commentList', function(req, res, next) {
 
 });
 
-function queryAllReply(list,topic_id,callback){
+function queryAllReply(list,topic_id,type,callback){
     async.map(list, function(item, callback) {
-        queryUserComment(item.id,topic_id,function(data) {
+        queryUserComment(item.id,topic_id,type,function(data) {
             getAllUserInfo(data.list, function (err) {
                 item.reply = data;
                 callback(err);
@@ -137,13 +130,13 @@ function queryAllUserInfo(replyItem,callback){
 }
 
 
-function queryUserComment(reply_id,topic_id,callBack){
+function queryUserComment(reply_id,topic_id,type,callBack){
     var data={}
-
     var sqls = [
-        "select * from comments where  reply_id = "+reply_id+ " and topic_id = " +topic_id +" order by cTime desc",
-        "select count(id) as total from comments where reply_id = "+reply_id+ " and  topic_id = " +topic_id
+        "select * from comments where type= '"+type+"' and reply_id = "+reply_id+ " and topic_id = " +topic_id +" order by cTime desc",
+        "select count(id) as total from comments where type= '"+type+"' and reply_id = "+reply_id+ " and  topic_id = " +topic_id
     ];
+    console.log(sqls[0])
     async.parallel([
             function(callback){
                 db.query(sqls[0], function(err, rows, fields){

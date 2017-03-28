@@ -14,10 +14,11 @@ router.post('/addRes', function(req, res, next) {
        var tableSql =  'CREATE TABLE '+tableName+' ('+
                     'id int(11) NOT NULL AUTO_INCREMENT,'+
                     'content longtext NOT NULL,'+
-                    'createTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
-                    'modifiedTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
+                    'createTime TIMESTAMP NOT NULL DEFAULT "0000-00-00 00:00:00",'+
+                    'modifiedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,'+
                     'isOnLine int(2) NOT NULL DEFAULT 1,'+
                     'readyNum int(11) NOT NULL DEFAULT 0,'+
+                    'isRecommend int(2) NOT NULL DEFAULT 0,'+
                     'startTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'endTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'PRIMARY KEY (id))';
