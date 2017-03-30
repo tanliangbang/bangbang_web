@@ -18,7 +18,7 @@ var compass = require('gulp-compass');
 //app directory structor
 var yeoman = {
   app: require('./bower.json').appPath || 'app',
-  dist: 'dist',
+  dist: 'bangbang_manage',
   temp: '.tmp',
   test: 'test'
 };
@@ -66,7 +66,7 @@ var styles = lazypipe()
   .pipe($.autoprefixer, {
     browsers:['last 2 version']
   })
-  .pipe(gulp.dest,yeoman.temp + '/styles');
+  .pipe(gulp.dest);
 
 ///////////
 // Tasks //
@@ -275,13 +275,18 @@ gulp.task('copy:fonts', function () {
     .pipe(gulp.dest(yeoman.dist + '/fonts'));
 });
 
+gulp.task('copy:plugs', function () {
+  return gulp.src(yeoman.app + '/assets')
+    .pipe(gulp.dest(yeoman.dist));
+});
+
 gulp.task('copy:favicon', function () {
   return gulp.src(yeoman.app + '/favicon.ico')
     .pipe(gulp.dest(yeoman.dist));
 });
 
 gulp.task('build', ['clean:dist', 'bower'], function () {
-  runSequence(['images', 'copy:extras', 'copy:fonts', 'copy:favicon', 'client:build']);
+  runSequence(['images', 'copy:extras', 'copy:fonts','copy:plugs', 'copy:favicon', 'client:build']);
 });
 
-gulp.task('default', ['build']);
+gulp.task('default', ['bangbang_manage']);

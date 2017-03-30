@@ -1,0 +1,64 @@
+<div class="content-wrapper addArticle">
+  <div ng-include="'views/common/nav.html'"></div>
+
+
+
+  <div class="panel panel-lime plain toggle panelMove panelClose panelRefresh" id="jst_5">
+    <!-- Start .panel -->
+    <div class="panel-heading">
+      <h4 class="panel-title">{{isEdit?'编辑':'添加'}}{{currResType.cname}}</h4>
+      <div class="panel-controls"><a href="#" class="panel-refresh"><i class="im-spinner12"></i></a><a href="#" class="toggle panel-minimize"><i class="im-minus"></i></a><a href="#" class="panel-close"><i class="im-close"></i></a></div></div>
+    <div class="panel-body pb0">
+      <form class="form-horizontal group-border hover-stripped resAddContentForm" ng-submit="submitResFn()" name="myForm" role="form" ->
+
+
+        <div  field ng-repeat="(key,val) in fields" class="otherFields"   data-num="{{$index}}"  data-desc="{{val.dataChinaName}}" data-name="{{key}}" data-type="{{val.dataType}}" data-enumVal="{{val.enumVal}}" data-isNeed="{{val.dataIsNeed}}" data-content="{{editorContent[$index][key]}}"></div>
+
+
+        <div class="form-group topBorder">
+          <label class="col-sm-3 control-label">是否上线：</label>
+          <div class="col-sm-3">
+            <select  class="form-control" ng-model="otherField.isOnLine">
+              <option value="1">是</option>
+              <option value="0">否</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">活动开始时间:</label>
+          <div class="col-sm-3">
+            <input ng-model="otherField.startTime" datetimepicker name="startTime"  class="form-control"  type="text" placeholder="活动开始时间" required>
+          </div>
+
+          <label class="col-sm-3 control-label">活动结束时间:</label>
+          <div class="col-sm-3">
+            <input ng-model="otherField.endTime" datetimepicker  name="endTime" class="form-control"    type="text"  placeholder="活动开始时间" required>
+
+          </div>
+        </div>
+
+
+        <div class="form-group t-center">
+          <button ng-if="!resContentId"   type="submit"  class="btn btn-success">添&nbsp;&nbsp;&nbsp;&nbsp;加</button>
+          <button ng-if="resContentId"  type="submit"  class="btn btn-success">修&nbsp;&nbsp;&nbsp;&nbsp;改</button>
+
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+        <div file-input="file" on-change="readFile()"></div>
+
+        <img ng-src="{{imageSrc}}"/>
+
+
+
+
+</div>

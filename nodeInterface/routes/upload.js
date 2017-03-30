@@ -17,7 +17,7 @@ router.post('/uploadImg', function(req, res, next) {
    var dstPath = './public/files/' + files["resImg"][0].originalFilename;
 //重命名为真实文件名
 
-   var url = "http://localhost:3000/public/files/"+files["resImg"][0].originalFilename;
+   var url = "http://119.29.237.158:3000/public/files/"+files["resImg"][0].originalFilename;
    fs.rename(uploadedPath, dstPath, function(err) {
     if(err){
      console.log('rename error: ' + err);

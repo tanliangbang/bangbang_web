@@ -136,7 +136,6 @@ function queryUserComment(reply_id,topic_id,type,callBack){
         "select * from comments where type= '"+type+"' and reply_id = "+reply_id+ " and topic_id = " +topic_id +" order by cTime desc",
         "select count(id) as total from comments where type= '"+type+"' and reply_id = "+reply_id+ " and  topic_id = " +topic_id
     ];
-    console.log(sqls[0])
     async.parallel([
             function(callback){
                 db.query(sqls[0], function(err, rows, fields){
