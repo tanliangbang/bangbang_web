@@ -25,4 +25,13 @@ utilFn.checkNumber = function(num){
     return num;
 }
 
+
+utilFn.dealRes = function(rows){
+    for(var i=0;i<rows.length;i++){
+        rows[i].content  = JSON.parse(rows[i].content);
+        delete rows[i].content.content;
+    }
+    return rows;
+}
+
 module.exports = utilFn;

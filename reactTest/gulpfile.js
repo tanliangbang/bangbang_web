@@ -66,7 +66,6 @@ var styles = lazypipe()
   .pipe($.autoprefixer, {
     browsers:['last 2 version']
   })
-  .pipe(gulp.dest);
 
 ///////////
 // Tasks //

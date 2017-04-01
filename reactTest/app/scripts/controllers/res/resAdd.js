@@ -40,7 +40,8 @@ angular.module('reactTestApp')
         currResType = data.data[0];
         $scope.fields = analysisField(currResType.type_specification);
         $scope.res_desc = currResType.cname;
-        $scope.res_name = currResType.name;
+        $scope.res_name = $scope.tempTableName = currResType.name;
+        $scope.res_type = currResType.res_type;
       }).error(function (data, status, headers, congfig) {
         defer.reject(data);
       });
@@ -133,11 +134,11 @@ angular.module('reactTestApp')
       }
       var type_specification = deal_fieldFn($scope.fields);
       if($scope.id){
-          $http.post("/api/res/updateRes", {id:$scope.id,name:name,cname:describe,type_specification:type_specification}).success(function(responseData) {
+          $http.post("/api/res/updateRes", {id:$scope.id,name:name,cname:describe,tempTableName:$scope.tempTableName,type_specification:type_specification,res_type:$scope.res_type}).success(function(responseData) {
             $location.path("resList");
           });
       }else{
-        $http.post("/api/res/addRes", {name:name,cname:describe,type_specification:type_specification}).success(function(responseData) {
+        $http.post("/api/res/addRes", {name:name,cname:describe,type_specification:type_specification,res_type:$scope.res_type}).success(function(responseData) {
            $location.path("resList");
         });
       }
