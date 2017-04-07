@@ -59,8 +59,7 @@ var app = angular.module('reactTestApp');
     var  file=  ' <div ng-if='+fileNI+'  class="form-group tAlign">'+
                         '<label class="col-sm-3 control-label">{{desc}}：</label>'+
                         '<div  class="imgPreview" ng-click="addFileFn($event)">'+
-                               '<img ng-if="content" ng-src="{{content}}">'+
-                               '<i ng-if="!content" class="fa fa-plus addBtn"></i>'+
+
                           '</div>'+
                           '<div class="btn uploadBtn"    ng-click="uploadFiles($event)"> 上传</div>'+
                          '<input onchange="getImgDate(this)" url="{{content}}" class="fileInput none" id="{{name}}" name="{{name}}" type="file">'+

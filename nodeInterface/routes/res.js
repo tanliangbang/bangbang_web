@@ -10,7 +10,7 @@ var utilFn = require('../util/utilFn');
 router.post('/addRes', function(req, res, next) {
       tableName = 'res_content_'+req.body.name.toLowerCase();
       var sql = "insert into res (name,cname,res_type,type_specification) values "+
-        "('"+req.body.name.toLowerCase()+"','"+req.body.cname+"','"+"','"+req.body.res_type+"','"+ req.body.type_specification+"')";
+        "('"+req.body.name.toLowerCase()+"','"+req.body.cname+"'"+",'"+req.body.res_type+"','"+ req.body.type_specification+"')";
        var tableSql =  'CREATE TABLE '+tableName+' ('+
                     'id int(11) NOT NULL AUTO_INCREMENT,'+
                     'content longtext NOT NULL,'+
@@ -22,6 +22,7 @@ router.post('/addRes', function(req, res, next) {
                     'startTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'endTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'PRIMARY KEY (id))';
+    console.log(sql)
         db.query(sql, function(err, rows, fields){
             if (err) {
                 console.log(err);
@@ -84,7 +85,15 @@ router.post('/delRes', function(req, res, next) {
 
 
 router.get('/getResList', function(req, res, next) {
-    var sql = "select * from res";
+    var arg = url.parse(req.url, true).query;
+    var typeWhere = arg.res_type;
+    if(typeWhere){
+        typeWhere = " where res_type ='"+arg.res_type+"'"
+    }else{
+        typeWhere = "";
+    }
+    var sql = "select * from res" +typeWhere;
+    console.log(sql)
     db.query(sql, function(err, rows, fields){
         if (err) {
             return;
@@ -121,8 +130,20 @@ router.get('/getRes', function(req, res, next) {
 
 router.post('/addResContent', function(req, res, next) {
     var tableName = 'res_content_'+req.body.name.toLowerCase();
+    var startTime = req.body.startTime
+    var endTime = req.body.endTime;
+    if(startTime){
+        startTime = "from_unixtime('"+req.body.startTime+"')"
+    }else{
+        startTime = "null";
+    }
+    if(endTime){
+        endTime = "from_unixtime('"+req.body.endTime+"')"
+    }else{
+        endTime = "null";
+    }
     var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime,readyNum) values ("+
-        db.escape(req.body.content)+",from_unixtime('"+req.body.startTime+"'),from_unixtime('"+ req.body.endTime+"'),"+ req.body.onLine+",now(),now(),0)";
+        db.escape(req.body.content)+","+startTime+","+endTime+","+ req.body.onLine+",now(),now(),0)";
     db.query(sql, function(err, rows, fields){
         if (err) {
            return;
