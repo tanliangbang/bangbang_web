@@ -7,6 +7,10 @@ var mysql = require('mysql');
 var db = require('../util/db.js');
 var url = require('url');
 var utilFn = require('../util/utilFn');
+var async = require('async');
+
+
+
 router.post('/addRes', function(req, res, next) {
       tableName = 'res_content_'+req.body.name.toLowerCase();
       var sql = "insert into res (name,cname,res_type,type_specification) values "+
@@ -19,6 +23,7 @@ router.post('/addRes', function(req, res, next) {
                     'isOnLine int(2) NOT NULL DEFAULT 1,'+
                     'readyNum int(11) NOT NULL DEFAULT 0,'+
                     'isRecommend int(2) NOT NULL DEFAULT 0,'+
+                    'from_uid int(11) NOT NULL DEFAULT 0,'+
                     'startTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'endTime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",'+
                     'PRIMARY KEY (id))';
@@ -129,6 +134,11 @@ router.get('/getRes', function(req, res, next) {
 
 
 router.post('/addResContent', function(req, res, next) {
+    var from_uid = 0;
+    console.log(req.session.user.id)
+    if(req.session.user){
+        from_uid = req.session.user.id
+    }
     var tableName = 'res_content_'+req.body.name.toLowerCase();
     var startTime = req.body.startTime
     var endTime = req.body.endTime;
@@ -142,8 +152,8 @@ router.post('/addResContent', function(req, res, next) {
     }else{
         endTime = "null";
     }
-    var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime,readyNum) values ("+
-        db.escape(req.body.content)+","+startTime+","+endTime+","+ req.body.onLine+",now(),now(),0)";
+    var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime,readyNum,from_uid) values ("+
+        db.escape(req.body.content)+","+startTime+","+endTime+","+ req.body.onLine+",now(),now(),0,"+from_uid+")";
     db.query(sql, function(err, rows, fields){
         if (err) {
            return;
@@ -187,16 +197,51 @@ router.get('/getResContentList', function(req, res, next) {
         }
         rows = utilFn.dealRes(rows)
         var content =rows;
-        db.query(totalSql, function(err, rows, fields){
-            if (err) {
-                return;
-            }
-            var data={content:content,pageTotal:rows[0].total}
-            utilFn.successSend(res,data);
-        });
+        var pageTotal = 0;
+
+
+        async.parallel([
+                function(callback){
+                    getAllUserByFromUid(content,callback)
+                },
+                function(callback){
+                    db.query(totalSql, function(err, rows, fields){
+                        if (err) {
+                            return;
+                        }
+                        pageTotal = rows[0].total;
+                        callback(err);
+                    });
+                }
+            ],
+            function(err){
+                 var data={content:content,pageTotal:pageTotal}
+                 utilFn.successSend(res,data);
+            });
+
 
     });
 });
+
+
+
+function getAllUserByFromUid(content,callback){
+    async.map(content, function(item, callback) {
+        var sql = "select userName,nick from bang_users where id ="+item.from_uid
+        db.query(sql, function(err, rows) {
+            if(err) {
+                console.log(err);
+            }
+            item.from_user=rows[0];
+            callback(err);
+        });
+    }, function(err, results) {
+        if(err) {
+            console.log(err)
+        }
+        callback(err);
+    });
+}
 
 router.post('/delResContent', function(req, res, next) {
     var id =req.body.id;
