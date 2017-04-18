@@ -135,7 +135,6 @@ router.get('/getRes', function(req, res, next) {
 
 router.post('/addResContent', function(req, res, next) {
     var from_uid = 0;
-    console.log(req.session.user.id)
     if(req.session.user){
         from_uid = req.session.user.id
     }
@@ -300,9 +299,6 @@ router.get('/readyRank', function(req, res, next) {
         utilFn.successSend(res,rows);
     });
 });
-
-
-
 
 
 module.exports = router;

@@ -12,10 +12,10 @@ utilFn.successSend = function(res,data,statusCode,errorMsg){
     res.end(JSON.stringify(data));
 }
 utilFn.checkEmpty = function(str){
-    if(str||str ==""){
-       return str;
+    if(!str||str ==null){
+       return "";
     }
-    return "";
+    return str;
 }
 
 utilFn.checkNumber = function(num){
