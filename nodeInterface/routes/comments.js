@@ -101,12 +101,12 @@ function queryAllUserInfo(replyItem,callback){
     var sqls =[];
     if(replyItem.to_uid>0){
         sqls = [
-            {sql:"select userName,nick from bang_users where id ="+ replyItem.from_uid,type:"from"},
-            {sql:"select userName,nick from bang_users where id ="+ replyItem.to_uid,type:"to"}
+            {sql:"select id,userAavar,userName,nick from bang_users where id ="+ replyItem.from_uid,type:"from"},
+            {sql:"select id,userAavar,userName,nick from bang_users where id ="+ replyItem.to_uid,type:"to"}
         ];
     }else{
         sqls = [
-            {sql:"select userName,nick from bang_users where id ="+ replyItem.from_uid,type:"from"},
+            {sql:"select id,userAavar,userName,nick from bang_users where id ="+ replyItem.from_uid,type:"from"},
         ];
     }
     async.map(sqls, function(item, callback) {

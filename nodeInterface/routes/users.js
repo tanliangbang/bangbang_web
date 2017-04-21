@@ -6,7 +6,7 @@ var utilFn = require('../util/utilFn');
 
 
 router.post('/login', function(req, res, next) {
-  var sql = "select * from bang_users where username= '"+req.body.username+"' and password = '"+req.body.password +"'";
+  var sql = "select id,username,userAavar,nick,phone,address,job,sex,userBreif from bang_users where username= '"+req.body.username+"' and password = '"+req.body.password +"'";
   db.query(sql, function(err, rows, fields){
     if (err) {
       console.log(err);
@@ -39,8 +39,8 @@ router.post('/register', function(req, res, next) {
 
 
 function innerUser(req, res, next){
-    var sql = "insert into bang_users (username,password,email) values "+
-        "('"+req.body.username+"','"+req.body.password+"','"+ req.body.email+"')";
+    var sql = "insert into bang_users (username,password) values "+
+        "('"+req.body.username+"','"+req.body.password+"')";
     var getSql = "select * from bang_users where username= '"+req.body.username+"' and password = '"+req.body.password +"'";
 
     db.query(sql, function(err, rows, fields){
@@ -63,9 +63,9 @@ function innerUser(req, res, next){
 }
 
 router.post('/changeUserInfo', function(req, res, next) {
-    var sql =  "update bang_users set userAavar='"+ utilFn.checkEmpty(req.body.userAvar)+"',nick='"+utilFn.checkEmpty(req.body.nick)+"',phone='" +
+    var sql =  "update bang_users set userAavar='"+ utilFn.checkEmpty(req.body.userAavar)+"',nick='"+utilFn.checkEmpty(req.body.nick)+"',phone='" +
          utilFn.checkEmpty(req.body.phone)+"',address='"+utilFn.checkEmpty(req.body.address)+"',job='"+utilFn.checkEmpty(req.body.job)+"',sex = '"+utilFn.checkEmpty(req.body.sex)+"',userBreif='"+utilFn.checkEmpty(req.body.userBreif)+"' where id="+req.session.user.id;
-    var userSql ="select * from bang_users where id = "+req.session.user.id ;
+    var userSql ="select id,username,userAavar,nick,phone,address,job,sex,userBreif from bang_users where id = "+req.session.user.id ;
     db.query(sql, function(err, rows, fields){
         if (err) {
             utilFn.successSend(res,null,500,'请求失败');

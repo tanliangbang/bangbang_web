@@ -226,7 +226,7 @@ router.get('/getResContentList', function(req, res, next) {
 
 function getAllUserByFromUid(content,callback){
     async.map(content, function(item, callback) {
-        var sql = "select userName,nick from bang_users where id ="+item.from_uid
+        var sql = "select id,userAavar,userName,nick from bang_users where id ="+item.from_uid
         db.query(sql, function(err, rows) {
             if(err) {
                 console.log(err);
