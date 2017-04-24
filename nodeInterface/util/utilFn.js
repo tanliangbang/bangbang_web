@@ -12,7 +12,7 @@ utilFn.successSend = function(res,data,statusCode,errorMsg){
     res.end(JSON.stringify(data));
 }
 utilFn.checkEmpty = function(str){
-    if(!str||str ==null){
+    if(!str||str ==null||str =='null'){
        return "";
     }
     return str;
