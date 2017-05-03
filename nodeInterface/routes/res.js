@@ -141,6 +141,7 @@ router.post('/addResContent', function(req, res, next) {
     var tableName = 'res_content_'+req.body.name.toLowerCase();
     var startTime = req.body.startTime
     var endTime = req.body.endTime;
+    var parseContent = JSON.parse(req.body.content);
     if(startTime){
         startTime = "from_unixtime('"+req.body.startTime+"')"
     }else{
@@ -151,15 +152,40 @@ router.post('/addResContent', function(req, res, next) {
     }else{
         endTime = "null";
     }
-    var sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime,readyNum,from_uid) values ("+
+
+    var sql =  "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime,readyNum,from_uid) values ("+
         db.escape(req.body.content)+","+startTime+","+endTime+","+ req.body.onLine+",now(),now(),0,"+from_uid+")";
-    db.query(sql, function(err, rows, fields){
-        if (err) {
-           return;
-        }else{
-            utilFn.successSend(res);
-        }
-    });
+
+    if(parseContent.content){
+        var contentSql = "insert into res_content (content) values ('"+parseContent.content+"')";
+        db.query(contentSql, function(err, rows, fields) {
+            if (err) {
+                return;
+            }else{
+                parseContent.content  = rows.insertId;
+                parseContent = JSON.stringify(parseContent);
+                sql = "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime,readyNum,from_uid) values ("+
+                db.escape(parseContent)+","+startTime+","+endTime+","+ req.body.onLine+",now(),now(),0,"+from_uid+")";
+                db.query(sql, function(err, rows, fields){
+                    if (err) {
+                        return;
+                    }else{
+                        utilFn.successSend(res);
+                    }
+                });
+            }
+        });
+    }else{
+            db.query(sql, function(err, rows, fields){
+                if (err) {
+                    return;
+                }else{
+                    utilFn.successSend(res);
+                }
+            });
+    }
+
+
 });
 
 

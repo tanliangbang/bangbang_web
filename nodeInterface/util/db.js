@@ -3,12 +3,13 @@ var db    = {};
 var mysql = require('mysql');
 var pool  = mysql.createPool({
     connectionLimit : 10,
-    host            : 'localhost',
+    host            : '118.89.161.150',
     user            : 'root',
-    password        : 'root',
+    password        : 'tanliangbang',
     database        : 'bangbang_web',
     charset: 'UTF8_GENERAL_CI'
 });
+
 
 db.query = function(sql, callback){
 
@@ -22,7 +23,6 @@ db.query = function(sql, callback){
             callback(err, null);
             return;
         };
-
         callback(null, rows, fields);
     });
 };
