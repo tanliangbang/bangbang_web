@@ -155,7 +155,6 @@ router.post('/addResContent', function(req, res, next) {
 
     var sql =  "insert into "+tableName+" (content,startTime,endTime,isOnline,createTime,modifiedTime,readyNum,from_uid) values ("+
         db.escape(req.body.content)+","+startTime+","+endTime+","+ req.body.onLine+",now(),now(),0,"+from_uid+")";
-
     if(parseContent.content){
         var contentSql = "insert into res_content (content) values ('"+parseContent.content+"')";
         db.query(contentSql, function(err, rows, fields) {
@@ -289,13 +288,43 @@ router.get('/getResContentById', function(req, res, next) {
             return;
         }
         rows[0].content = JSON.parse(rows[0].content);
+        var id = 0;
+        var detail = rows;
         updateSql = updateSql + (parseInt(rows[0].readyNum)+1)+" where id ="+arg.id;
-        db.query(updateSql, function(err, rows, fields) {
-            if (err) {
-                return;
-            }
-        });
-        utilFn.successSend(res,rows);
+        if(utilFn.isNumber(rows[0].content.content)){
+            id =  parseInt(rows[0].content.content);
+            var sqlContent = "select * from res_content where id = "+id;
+            async.parallel([
+                    function(callback){
+                        db.query(sqlContent, function(err, rows, fields) {
+                            detail[0].content.content = rows[0].content
+                            if (err) {
+                                return;
+                            }
+                            callback(err);
+                        });
+                    },
+                    function(callback){
+                        db.query(updateSql, function(err, rows, fields) {
+                            if (err) {
+                                return;
+                            }
+                            callback(err);
+
+                        });
+                    }
+                ],
+                function(err){
+                    utilFn.successSend(res,detail);
+                });
+        }else{
+            db.query(updateSql, function(err, rows, fields) {
+                if (err) {
+                    return;
+                }
+                utilFn.successSend(res,detail);
+            });
+        }
     });
 });
 
@@ -325,6 +354,10 @@ router.get('/readyRank', function(req, res, next) {
         utilFn.successSend(res,rows);
     });
 });
+
+
+
+
 
 
 module.exports = router;

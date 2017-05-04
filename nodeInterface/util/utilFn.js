@@ -34,4 +34,14 @@ utilFn.dealRes = function(rows){
     return rows;
 }
 
+
+utilFn.isNumber = function(value) {
+    var patrn = /^[0-9]*$/;
+    if (patrn.exec(value) == null || value == "") {
+        return false
+    } else {
+        return true
+    }
+}
+
 module.exports = utilFn;
