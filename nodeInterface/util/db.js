@@ -3,9 +3,9 @@ var db    = {};
 var mysql = require('mysql');
 var pool  = mysql.createPool({
     connectionLimit : 10,
-    host            : '118.89.161.150',
+    host            : '127.0.0.1',
     user            : 'root',
-    password        : 'tanliangbang',
+    password        : 'root',
     database        : 'bangbang_web',
     charset: 'UTF8_GENERAL_CI'
 });
